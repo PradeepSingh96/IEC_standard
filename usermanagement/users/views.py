@@ -1,14 +1,19 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from .models import User
-from passlib.hash import sha256_crypt
 from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.models import update_last_login
 from django.core.mail import send_mail
 from itsdangerous import URLSafeTimedSerializer
 from datetime import timedelta
+from usermanagement.settings import SECRET_KEY, EMAIL_HOST_USER
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
-SECRET_KEY = 'nzu3f^zvxhxm2e+ei)p&^qr)ap#v5*!93(w!al-b3vp6z=qoz0'
+
+SECRET_KEY = SECRET_KEY
 
 JWT_PAYLOAD_HANDLER = api_settings.JWT_PAYLOAD_HANDLER
 JWT_ENCODE_HANDLER = api_settings.JWT_ENCODE_HANDLER
@@ -18,6 +23,7 @@ def index(request):
     return render(request, 'index.html')
 
 
+# User Register
 def register(request):
     if request.method == 'POST':
         name = request.POST['name']
@@ -42,7 +48,9 @@ def register(request):
         return render(request, 'register.html')
 
 
+# user login
 def login(request):
+
     if request.method == 'POST':
 
         email = request.POST['email']
@@ -51,13 +59,9 @@ def login(request):
         if len(user_email) == 0:
             messages.info(request, 'email is not registered')
             return redirect('login')
-        user, password_match = User.login_with_email(email, password)
-        if user and password_match:
+        user = authenticate(email=email, password=password)
+        if user is not None:
             print('login Success')
-            user = User.objects.get(email=email)
-            payload = JWT_PAYLOAD_HANDLER(user)
-            jwt_token = JWT_ENCODE_HANDLER(payload)
-            print("jwt_token : ", jwt_token)
             update_last_login(None, user)
             return redirect('/')
         else:
@@ -69,6 +73,7 @@ def login(request):
         return render(request, 'login.html')
 
 
+# forget password email send
 def send_email(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -90,6 +95,7 @@ def send_email(request):
         return render(request, 'send_email.html')
 
 
+# update password
 def change_password(request, **kwargs):
     if request.method == 'POST':
         password1 = request.POST['password1']
@@ -100,7 +106,7 @@ def change_password(request, **kwargs):
         if email:
             if password1 == password2:
                 user = User.objects.filter(email=email).get()
-                user.password = sha256_crypt.encrypt(password1)
+                user.set_password(password1)
                 user.save()
                 return redirect('login')
             else:
