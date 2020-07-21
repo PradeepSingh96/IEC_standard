@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+</head>
+<body>
+    <h1> Hi here you see the Projects</h1>
+    {% for project in projects %}
+    <div>
+        <img src="{{project.image.url}}" alt="">
+        {{project.title}}
+        (<a href="{{project.link}}">{{project.link}}</a>)
+        {{project.description}}
+        {{project.approved}}
+    </div>
+    {% endfor %}
+</body>
+</html>

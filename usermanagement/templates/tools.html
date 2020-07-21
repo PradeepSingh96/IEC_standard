@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools</title>
+
+    <style> 
+        h1 { 
+            text-align:center; 
+        } 
+        h3 { 
+            text-align:center; 
+            color: blue;
+        } 
+        body { 
+            width:70%; 
+        } 
+        .container .box { 
+            width:540px; 
+            margin:50px; 
+            display:table; 
+        } 
+        .container .box .box-row { 
+            display:table-row; 
+        } 
+        .container .box .box-cell { 
+            display:table-cell; 
+            width:50%; 
+            padding:10px; 
+            
+        } 
+        .container .box .box-cell.box1 { 
+        
+            color:white; 
+            text-align:justify; 
+         } 
+        .container .box .box-cell.box2 { 
+            background:lightgreen; 
+            text-align:justify;
+            margin-top: 0px;
+        } 
+    </style> 
+
+</head>
+<body>
+    <h1> Hi here you see the Tools</h1>
+    {% for tool in tools %}
+    <div class="container"> 
+        <div class="box"> 
+            <div class="box-row"> 
+                <div class="box-cell box1"> 
+                    <img src="{{tool.image.url}}" alt="">
+                </div> 
+                <div class="box-cell box2"> 
+                    <h3>{{tool.title}}</h3> (<a href="{{tool.link}}">{{tool.link}}</a>)
+                    {{tool.description}}
+                </div> 
+            </div> 
+        </div> 
+    </div> 
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+</head>
+<body>
+    <h1> Hi here you see the news</h1>
+    {% for ne in news %}
+    <div>
+       <img src="{{ne.image.url}}" alt="">
+        {{ne.title}}
+        (<a href="{{ne.link}}">{{ne.link}}</a>)
+        <br>
+        {{ne.description}}
+    </div>
+    {% endfor %}
+</body>
+</html>
