@@ -6,19 +6,10 @@ from django.contrib.auth.models import PermissionsMixin
 from passlib.hash import sha256_crypt
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
+# from django.core.urlresover import reverse
+from django.urls import reverse
 
-# class MyUserManager(BaseUserManager):
-#     ''' Inherits BaseUserManager class'''
-#
-#     def create_superuser(self,name, email, password):
-#         '''Creates and saves a superuser with the given email and password.'''
-#         user = self.model(email=email, name=name)
-#         user.set_password(password)
-#         user.is_superuser = True
-#         user.is_active = True
-#         user.is_staff = True
-#         user.save(using=self._db)
-#         return user
+
 class UserManager(BaseUserManager):
     use_in_migrations = True
     def create_user(self, name, email, password=None):
@@ -57,6 +48,31 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Tools(models.Model):
-    Title = models.CharField(max_length=200)
-    Description = models.CharField(max_length=40000)
+    title = models.CharField(max_length=1000)
+    link = models.CharField(max_length=200)
+    description = models.CharField(max_length=40000)
+    image = models.FileField(upload_to='tools/', blank=False, null=False)
 
+    def __str__(self):
+        return self.title#, self.link, self.description, self.image
+
+
+class News(models.Model):
+    title = models.CharField(max_length=1000)
+    link = models.CharField(max_length=200)
+    description = models.CharField(max_length=40000)
+    image = models.FileField(upload_to='news/', blank=False, null=False)
+
+    def __str__(self):
+        return self.title#, self.link, self.description, self.image
+
+
+class Projects(models.Model):
+    title = models.CharField(max_length=1000)
+    link = models.CharField(max_length=200)
+    description = models.CharField(max_length=40000)
+    image = models.FileField(upload_to='projects/', blank=False, null=False)
+    approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title#, self.link, self.description, self.image

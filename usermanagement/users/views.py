@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from .models import User
-from rest_framework_jwt.settings import api_settings
+from .models import User, News, Tools, Projects
+
 from django.contrib.auth.models import update_last_login
 from django.core.mail import send_mail
 from itsdangerous import URLSafeTimedSerializer
@@ -14,9 +14,6 @@ User = get_user_model()
 
 
 SECRET_KEY = SECRET_KEY
-
-JWT_PAYLOAD_HANDLER = api_settings.JWT_PAYLOAD_HANDLER
-JWT_ENCODE_HANDLER = api_settings.JWT_ENCODE_HANDLER
 
 
 def index(request):
@@ -82,7 +79,9 @@ def send_email(request):
             messages.info(request, 'email is not registered')
             return redirect('send_email')
         user = User.objects.filter(email=email).get()
-        link = 'http://127.0.0.1:8000/change_password/' + generate_confirmation_token(user.email)
+
+        link = 'http://'+request.get_host()+'/change_password/' + generate_confirmation_token(user.email)
+        
         subject = 'Reset Password'
         message = ("Hello " + user.name + ",\n\nPlease click on the following link to reset your password:\n")
 
@@ -102,7 +101,9 @@ def change_password(request, **kwargs):
         password2 = request.POST['password2']
         token = kwargs.get('token')
         email = confirm_token(token)
-        link = 'http://127.0.0.1:8000/change_password/' + token
+        
+        link = 'http://'+request.get_host()+'/change_password/' + token
+        
         if email:
             if password1 == password2:
                 user = User.objects.filter(email=email).get()
@@ -134,3 +135,27 @@ def confirm_token(token, expiration=43200):
     except:
         return False
     return email
+
+
+def news(request):
+    if request.method == "GET":
+        news = News.objects.all()
+        return render(request, 'news.html', {'news':news})
+    else:
+        return render(request, 'news.html')
+
+
+def projects(request):
+    if request.method == "GET":
+        projects = Projects.objects.filter(approved=True).all()
+        return render(request, 'projects.html', {'projects':projects})
+    else:
+        return render(request, 'projects.html')
+
+
+def tools(request):
+    if request.method == "GET":
+        tools = Tools.objects.all()
+        return render(request, 'tools.html' , {'tools':tools})
+    else:
+        return render(request, 'tools.html')
