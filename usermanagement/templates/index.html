@@ -6,14 +6,21 @@
 <body>
 
 <div class="super_container">
-
+		{% csrf_token %}
 	<header class="header">
 		<nav class="main_nav">
 			<ul class="d-flex flex-row align-items-start justify-content-start">
 			<li class="active"><a href="index.html">Home</a></li>
 			<li><a href="contact.html">Contact</a></li>
+
+			{% if user.is_authenticated %}
+				<li>Hello,{{user.name}}</li>
+				<li><a href="logout">Logout</a></li>
+			{% else %}
 			<li><a href="register">Signup</a></li>
 			<li><a href="login">Login</a></li>
+			{% endif %}
+
 			<li><a href="news">News</a></li>
 			<li><a href="projects">Projects</a></li>
 			<li><a href="tools">Tools</a></li>

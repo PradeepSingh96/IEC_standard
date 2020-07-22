@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from .models import User, News, Tools, Projects
 from django.core.files.storage import FileSystemStorage
-from django.contrib.auth.models import update_last_login
+from django.contrib.auth.models import update_last_login, auth
 from django.core.mail import send_mail
 from itsdangerous import URLSafeTimedSerializer
 from datetime import timedelta
@@ -10,7 +10,7 @@ from django.conf.global_settings import SECRET_KEY
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
-
+from django.contrib.auth.decorators import login_required
 User = get_user_model()
 
 
@@ -53,13 +53,12 @@ def login(request):
         if len(user_email) == 0:
             messages.info(request, 'email is not registered')
             return redirect('login')
-        user = authenticate(email=email, password=password)
+        user = auth.authenticate(email=email, password=password)
         if user is not None:
-            print('login Success')
+            auth.login(request, user)
             update_last_login(None, user)
             return redirect('/')
         else:
-            print("invalid cred")
             messages.info(request, 'invalid credentials')
             return redirect('login')
 
@@ -112,7 +111,9 @@ def change_password(request, **kwargs):
                 messages.info(request, 'password not matched')
                 return redirect(link)
         else:
-            return redirect('change_password')
+            print("email not found")
+            messages.info(request, 'This link is expired, Please generate new Link')
+            return redirect('send_email')
     else:
         return render(request, 'pass.html')
 
@@ -159,7 +160,7 @@ def tools(request):
         Commercial_tools_with_PLC_hardware_support = Tools.objects.filter(category='Commercial_tools_with_PLC_hardware_support').all().order_by('-modified_at')
         Open_source_tools = Tools.objects.filter(category='Open_source_tools').all().order_by('-modified_at')
         Academic_and_research_developments = Tools.objects.filter(category='Academic_and_research_developments').all().order_by('-modified_at')
-        # tools = Tools.objects.all().order_by('-modified_at')
+
         return render(request, 'tools.html', {'Commercial_tools_with_PLC_hardware_support': Commercial_tools_with_PLC_hardware_support,
                                               'Open_source_tools': Open_source_tools,
                                               'Academic_and_research_developments': Academic_and_research_developments})
@@ -168,6 +169,7 @@ def tools(request):
 
 
 # Add Project
+@login_required(login_url='login')
 def add_project(request):
     if request.method == "POST" and request.FILES['myfile']:
         title = request.POST['title']
@@ -185,3 +187,8 @@ def add_project(request):
         return redirect('add_project')
     else:
         return render(request, 'add_project.html')
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
