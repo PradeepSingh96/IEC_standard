@@ -6,8 +6,9 @@
     <title>Projects</title>
 </head>
 <body>
-    <h1> Hi here you see the Projects</h1>
-    {% for project in projects %}
+    <a style="text-decoration:none" href="{{base_url}}/add_project/">Add Project</a>
+    <h1> Student Projects</h1>
+    {% for project in Student_projects %}
     <div>
         <img src="{{project.image.url}}" alt="">
         {{project.title}}
@@ -15,6 +16,16 @@
         {{project.description}}
         {{project.approved}}
     </div>
+    {% endfor %}
+    <h1> Testbeds</h1>
+    {% for project in Test_beds %}
+        <div>
+            <img src="{{project.image.url}}" alt="">
+            {{project.title}}
+            (<a href="{{project.link}}">{{project.link}}</a>)
+            {{project.description}}
+            {{project.approved}}
+        </div>
     {% endfor %}
 </body>
 </html> -->

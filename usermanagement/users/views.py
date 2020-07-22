@@ -1,19 +1,17 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from .models import User, News, Tools, Projects
-
-from django.contrib.auth.models import update_last_login
+from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.models import update_last_login, auth
 from django.core.mail import send_mail
 from itsdangerous import URLSafeTimedSerializer
 from datetime import timedelta
-from usermanagement.settings import SECRET_KEY, EMAIL_HOST_USER
+from django.conf.global_settings import SECRET_KEY
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 User = get_user_model()
-
-
-SECRET_KEY = SECRET_KEY
 
 
 def index(request):
@@ -47,7 +45,6 @@ def register(request):
 
 # user login
 def login(request):
-
     if request.method == 'POST':
 
         email = request.POST['email']
@@ -56,13 +53,12 @@ def login(request):
         if len(user_email) == 0:
             messages.info(request, 'email is not registered')
             return redirect('login')
-        user = authenticate(email=email, password=password)
+        user = auth.authenticate(email=email, password=password)
         if user is not None:
-            print('login Success')
+            auth.login(request, user)
             update_last_login(None, user)
             return redirect('/')
         else:
-            print("invalid cred")
             messages.info(request, 'invalid credentials')
             return redirect('login')
 
@@ -80,8 +76,8 @@ def send_email(request):
             return redirect('send_email')
         user = User.objects.filter(email=email).get()
 
-        link = 'http://'+request.get_host()+'/change_password/' + generate_confirmation_token(user.email)
-        
+        link = 'http://' + request.get_host() + '/change_password/' + generate_confirmation_token(user.email)
+
         subject = 'Reset Password'
         message = ("Hello " + user.name + ",\n\nPlease click on the following link to reset your password:\n")
 
@@ -101,9 +97,9 @@ def change_password(request, **kwargs):
         password2 = request.POST['password2']
         token = kwargs.get('token')
         email = confirm_token(token)
-        
-        link = 'http://'+request.get_host()+'/change_password/' + token
-        
+
+        link = 'http://' + request.get_host() + '/change_password/' + token
+
         if email:
             if password1 == password2:
                 user = User.objects.filter(email=email).get()
@@ -115,7 +111,9 @@ def change_password(request, **kwargs):
                 messages.info(request, 'password not matched')
                 return redirect(link)
         else:
-            return redirect('change_password')
+            print("email not found")
+            messages.info(request, 'This link is expired, Please generate new Link')
+            return redirect('send_email')
     else:
         return render(request, 'pass.html')
 
@@ -128,34 +126,69 @@ def generate_confirmation_token(email):
 def confirm_token(token, expiration=43200):
     serializer = URLSafeTimedSerializer(SECRET_KEY)
     try:
-        email = serializer.loads(
-            token,
-            max_age=expiration
-        )
+        email = serializer.loads(token, max_age=expiration)
     except:
         return False
     return email
 
 
+# news
 def news(request):
     if request.method == "GET":
-        news = News.objects.all()
-        return render(request, 'news.html', {'news':news})
+        news = News.objects.all().order_by('-modified_at')
+        return render(request, 'news.html', {'news': news})
     else:
         return render(request, 'news.html')
 
 
+# Projects
 def projects(request):
     if request.method == "GET":
-        projects = Projects.objects.filter(approved=True).all()
-        return render(request, 'projects.html', {'projects':projects})
+
+        Student_projects = Projects.objects.filter(approved=True, category='Student_projects').all().order_by('-modified_at')
+        Test_beds = Projects.objects.filter(approved=True, category='Test_beds').all().order_by('-modified_at')
+
+        return render(request, 'projects.html', {'Student_projects': Student_projects, 'Test_beds': Test_beds})
     else:
         return render(request, 'projects.html')
 
 
+# Tools
 def tools(request):
     if request.method == "GET":
-        tools = Tools.objects.all()
-        return render(request, 'tools.html' , {'tools':tools})
+
+        Commercial_tools_with_PLC_hardware_support = Tools.objects.filter(category='Commercial_tools_with_PLC_hardware_support').all().order_by('-modified_at')
+        Open_source_tools = Tools.objects.filter(category='Open_source_tools').all().order_by('-modified_at')
+        Academic_and_research_developments = Tools.objects.filter(category='Academic_and_research_developments').all().order_by('-modified_at')
+
+        return render(request, 'tools.html', {'Commercial_tools_with_PLC_hardware_support': Commercial_tools_with_PLC_hardware_support,
+                                              'Open_source_tools': Open_source_tools,
+                                              'Academic_and_research_developments': Academic_and_research_developments})
     else:
         return render(request, 'tools.html')
+
+
+# Add Project
+@login_required(login_url='login')
+def add_project(request):
+    if request.method == "POST" and request.FILES['myfile']:
+        title = request.POST['title']
+        link = request.POST['link']
+        description = request.POST['description']
+        category = request.POST['category']
+        myfile = request.FILES['myfile']
+
+        fs = FileSystemStorage(location='media/projects/')
+        fs.save(myfile.name, myfile)
+        uploaded_file_url = 'projects/'+myfile.name
+
+        project = Projects(title=title, link=link, description=description, category=category, image=uploaded_file_url)
+        project.save()
+        return redirect('add_project')
+    else:
+        return render(request, 'add_project.html')
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/')

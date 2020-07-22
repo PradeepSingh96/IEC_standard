@@ -13,5 +13,7 @@ urlpatterns = [
     path("news/", views.news, name="news"),
     path("projects/", views.projects, name="projects"),
     path("tools/", views.tools, name="tools"),
+    path("add_project/", views.add_project, name="add_project"),
+    path("logout/", views.logout, name="logout"),
 
 ]

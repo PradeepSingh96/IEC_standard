@@ -3,15 +3,14 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
-from passlib.hash import sha256_crypt
-from django.utils.translation import ugettext_lazy as _
+# from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
-# from django.core.urlresover import reverse
 from django.urls import reverse
 
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
+
     def create_user(self, name, email, password=None):
 
         if not email:
@@ -47,14 +46,23 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
 
+Tools_CHOICES = (
+    ('Commercial_tools_with_PLC_hardware_support', 'Commercial tools with PLC hardware support'),
+    ('Open_source_tools', 'Open source tools'),
+    ('Academic_and_research_developments', 'Academic and research developments'),
+)
+
+
 class Tools(models.Model):
     title = models.CharField(max_length=1000)
     link = models.CharField(max_length=200)
     description = models.CharField(max_length=40000)
     image = models.FileField(upload_to='tools/', blank=False, null=False)
+    modified_at = models.DateTimeField(auto_now=True)
+    category = models.CharField(max_length=200, choices=Tools_CHOICES, default='Academic and research developments')
 
     def __str__(self):
-        return self.title#, self.link, self.description, self.image
+        return self.title  # , self.link, self.description, self.image
 
 
 class News(models.Model):
@@ -62,9 +70,16 @@ class News(models.Model):
     link = models.CharField(max_length=200)
     description = models.CharField(max_length=40000)
     image = models.FileField(upload_to='news/', blank=False, null=False)
+    modified_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title#, self.link, self.description, self.image
+        return self.title  # , self.link, self.description, self.image
+
+
+PROJECT_CHOICES = (
+        ('Student_projects', 'Student projects'),
+        ('Test_beds', 'Testbeds'),
+)
 
 
 class Projects(models.Model):
@@ -73,6 +88,8 @@ class Projects(models.Model):
     description = models.CharField(max_length=40000)
     image = models.FileField(upload_to='projects/', blank=False, null=False)
     approved = models.BooleanField(default=False)
+    category = models.CharField(max_length=200, choices=PROJECT_CHOICES, default='None')
+    modified_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title#, self.link, self.description, self.image
+        return self.title  # , self.link, self.description, self.image
