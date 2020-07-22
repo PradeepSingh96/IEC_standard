@@ -44,21 +44,57 @@
 
 </head>
 <body>
-    <h1> Hi here you see the Tools</h1>
-    {% for tool in tools %}
-    <div class="container"> 
-        <div class="box"> 
-            <div class="box-row"> 
-                <div class="box-cell box1"> 
+    <h2> Commercial_tools_with_PLC_hardware_support</h2>
+    {% for tool in Commercial_tools_with_PLC_hardware_support %}
+    <div class="container">
+        <div class="box">
+            <div class="box-row">
+                <div class="box-cell box1">
                     <img src="{{tool.image.url}}" alt="">
-                </div> 
-                <div class="box-cell box2"> 
+                </div>
+                <div class="box-cell box2">
                     <h3>{{tool.title}}</h3> (<a href="{{tool.link}}">{{tool.link}}</a>)
                     {{tool.description}}
-                </div> 
-            </div> 
-        </div> 
-    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
     {% endfor %}
+
+    <h2> Open_source_tools</h2>
+        {% for tool in Open_source_tools %}
+        <div class="container">
+            <div class="box">
+                <div class="box-row">
+                    <div class="box-cell box1">
+                        <img src="{{tool.image.url}}" alt="">
+                    </div>
+                    <div class="box-cell box2">
+                        <h3>{{tool.title}}</h3> (<a href="{{tool.link}}">{{tool.link}}</a>)
+                        {{tool.description}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+
+    <h2> Academic_and_research_developments</h2>
+        {% for tool in Academic_and_research_developments %}
+        <div class="container">
+            <div class="box">
+                <div class="box-row">
+                    <div class="box-cell box1">
+                        <img src="{{tool.image.url}}" alt="">
+                    </div>
+                    <div class="box-cell box2">
+                        <h3>{{tool.title}}</h3> (<a href="{{tool.link}}">{{tool.link}}</a>)
+                        {{tool.description}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
 </body>
 </html>

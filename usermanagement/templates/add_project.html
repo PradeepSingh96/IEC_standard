@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Add Project</title>
+
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif;}
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        .register{
+            background-color: lightblue;
+            width: 500px;
+            margin: 0px 0px 0px 430px;
+            font-size: 18px;
+            padding: 20px;
+            border-radius: 10px;
+    }
+        h1{
+            text-align: center;
+            padding: 20px   ;
+        }
+        .input-container {
+            display: -ms-flexbox; /* IE10 */
+            display: flex;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        .icon {
+            padding: 10px;
+            background: dodgerblue;
+            color: white;
+            min-width: 50px;
+            text-align: center;
+        }
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            outline: none;
+          }
+        .input-field:focus {
+            border: 2px solid dodgerblue;
+        }
+        .btn {
+            background-color: dodgerblue;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+          }
+
+          .btn:hover {
+            opacity: 1;
+          }
+    </style>
+</head>
+<body>
+    <h1> Add Project</h1>
+
+    <div class="register">
+    <form action="" method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <div class="input-container">
+            <i class="fa fa-user icon"></i>
+            <input class="input-field" type="text" placeholder="Title" name="title" required>
+        </div>
+
+        <div class="input-container">
+            <i class="fa fa-envelope icon"></i>
+            <input class="input-field" type="text" placeholder="Link" name="link" required>
+        </div>
+
+        <div class="input-container">
+            <i class="fa fa-key icon"></i>
+            <input class="input-field" type="text" placeholder="Description" name="description">
+        </div>
+
+        <div class="input-container">
+            <label for="category">category:</label>
+                <select name="category" id="cars">
+                    <option value="Student_projects">Student projects</option>
+                    <option value="Test_beds">Testbeds</option>
+                </select>
+        </div>
+    <div>
+        <p>File: <input type="file" name="myfile">
+    </div>
+
+        <button type="submit" class="btn">Signup</button>
+    </form>
+
+
+
+        
+    </div>
+
+
+</body>
+</html>
