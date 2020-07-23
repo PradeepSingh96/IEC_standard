@@ -323,24 +323,23 @@
       
     <main class="w-full flex-grow p-6 border-b border-gray-600">
         <p class="text-2xl text-gray-700 pb-3 flex items-center">
-            Commercial  tools with PLC hardware support
+            Commercial tools with PLC hardware support
           </p>
+        {% for i in Commercial_tools_with_PLC_hardware_support%}
         <div class="flex flex-wrap ">
             <div class="w-2/5">
                 <!--Add image here-->
-                <img src="./../media/bg-signup.png">
+                <img src="{{i.image.url}}" alt="">
             </div>
             <div class="lg:w-3/5">
                 <div class="p-4 bg-white border border-gray-200 shadow-md">
                     <div class="flex flex-wrap">
                         <div class="w-full">
-                            <p class="text-blue-500 font-semibold text-sm border-l-2 border-yellow-400 pl-2">2020</p>
-                            <p class="text-sm flex items-center text-gray-700 mt-3 ml-3">
-                                OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
-                                architecture
+                            <p class="text-blue-500 font-semibold text-sm border-l-2 border-yellow-400 pl-2">{{i.title}}(<a href="{{i.link}}" style="color:blue">{{i.link}}</a>)</p>
+                            <p class="text-sm flex items-center text-gray-700 mt-3 ml-3"></a>
                             
                             <ul class="list-disc text-gray-700 ml-4 mt-3 text-sm">
-                                <li>Ported to hundreds of hardware platforms</li>
+                                <li>{{i.description}}</li>
                             </ul>
                         </p>
                         </div>
@@ -349,29 +348,30 @@
               
             </div>
         </div>
+        {% endfor %}
     </main>
 
 
     <main class="w-full flex-grow p-6 border-b border-gray-600">
         <p class="text-2xl text-gray-700 pb-3 flex items-center">
-            Commercial  tools with PLC hardware support
+            Open source tools
           </p>
+        {% for i in Open_source_tools%}
         <div class="flex flex-wrap ">
             <div class="w-2/5">
                 <!--Add image here-->
-                <img src="./../media/bg-signup.png">
+                <img src="{{i.image.url}}" alt="">
             </div>
             <div class="lg:w-3/5">
                 <div class="p-4 bg-white border border-gray-200 shadow-md">
                     <div class="flex flex-wrap">
                         <div class="w-full">
-                            <p class="text-blue-500 font-semibold text-sm border-l-2 border-yellow-400 pl-2">2020</p>
+                            <p class="text-blue-500 font-semibold text-sm border-l-2 border-yellow-400 pl-2">{{i.title}}(<a href="{{i.link}}" style="color:blue">{{i.link}}</a>)</p>
                             <p class="text-sm flex items-center text-gray-700 mt-3 ml-3">
-                                OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
-                                architecture
+
                             
                             <ul class="list-disc text-gray-700 ml-4 mt-3 text-sm">
-                                <li>Ported to hundreds of hardware platforms</li>
+                                <li>{{i.description}}</li>
                             </ul>
                         </p>
                         </div>
@@ -380,6 +380,7 @@
               
             </div>
         </div>
+        {% endfor %}
     </main>
 
 
@@ -387,22 +388,22 @@
         <p class="text-2xl text-gray-700 pb-3 flex items-center">
             Academic research and development
           </p>
+        {% for i in Academic_and_research_developments%}
         <div class="flex flex-wrap ">
             <div class="w-2/5">
                 <!--Add image here-->
-                <img src="./../media/bg-signup.png">
+                <img src="{{i.image.url}}" alt="">
             </div>
             <div class="lg:w-3/5">
                 <div class="p-4 bg-white border border-gray-200 shadow-md">
                     <div class="flex flex-wrap">
                         <div class="w-full">
-                            <p class="text-blue-500 font-semibold text-sm border-l-2 border-yellow-400 pl-2">2020</p>
+                            <p class="text-blue-500 font-semibold text-sm border-l-2 border-yellow-400 pl-2">{{i.title}}(<a href="{{i.link}}" style="color:blue">{{i.link}}</a>)</p>
                             <p class="text-sm flex items-center text-gray-700 mt-3 ml-3">
-                                OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
-                                architecture
+
                             
                             <ul class="list-disc text-gray-700 ml-4 mt-3 text-sm">
-                                <li>Ported to hundreds of hardware platforms</li>
+                                <li>{{i.description}}</li>
                             </ul>
                         </p>
                         </div>
@@ -411,6 +412,7 @@
               
             </div>
         </div>
+        {% endfor %}
     </main>
 
 
