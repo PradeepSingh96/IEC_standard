@@ -352,7 +352,32 @@
         <p class="text-md text-gray-700">Master thesis: <a class="text-blue-500"
             href="https://aaltodoc.aalto.fi/handle/123456789/37120">Portability of IEC 61499 compliant
             software&nbsp;</a></p>
+        <!--Add Projects Database-->
+        {% for i in Student_projects%}
+        <div class="flex flex-wrap ">
+            <div class="w-2/5">
+                <!--Add image here-->
+                <img src="{{i.image.url}}" alt="">
+            </div>
+            <div class="lg:w-3/5">
+                <div class="p-4 bg-white border border-gray-200 shadow-md">
+                    <div class="flex flex-wrap">
+                        <div class="w-full">
+                            <p class="text-blue-500 font-semibold text-sm border-l-2 border-yellow-400 pl-2">{{i.title}}<a href="{{i.link}}">({{i.link}})</a></p>
+                            <p class="text-sm flex items-center text-gray-700 mt-3 ml-3">
 
+
+                            <ul class="list-disc text-gray-700 ml-4 mt-3 text-sm">
+                                <li>{{i.description}}</li>
+                            </ul>
+                        </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
       </main>
 
 
@@ -390,7 +415,32 @@
           </div>
 
         </div>
+        <!--Add Projects Database-->
+        {% for i in Test_beds%}
+        <div class="flex flex-wrap ">
+            <div class="w-2/5">
+                <!--Add image here-->
+                <img src="{{i.image.url}}" alt="">
+            </div>
+            <div class="lg:w-3/5">
+                <div class="p-4 bg-white border border-gray-200 shadow-md">
+                    <div class="flex flex-wrap">
+                        <div class="w-full">
+                            <p class="text-blue-500 font-semibold text-sm border-l-2 border-yellow-400 pl-2">{{i.title}}<a href="{{i.link}}">({{i.link}})</a></p>
+                            <p class="text-sm flex items-center text-gray-700 mt-3 ml-3">
 
+
+                            <ul class="list-disc text-gray-700 ml-4 mt-3 text-sm">
+                                <li>{{i.description}}</li>
+                            </ul>
+                        </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
       </main>
 
 
@@ -594,10 +644,8 @@
                   <select
                     class="bg-white block appearance-none w-48 border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     id="grid-state">
-                    <option>Choose</option>
-                    <option>New Mexico</option>
-                    <option>Missouri</option>
-                    <option>Texas</option>
+                    <option value="Student_projects">Student projects</option>
+                    <option value="Test_beds">Testbeds</option>
                   </select>
                 </div>
 
