@@ -1,14 +1,15 @@
 <!-- <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects</title>
 </head>
+
 <body>
-    <a style="text-decoration:none" href="{{base_url}}/add_project/">Add Project</a>
-    <h1> Student Projects</h1>
-    {% for project in Student_projects %}
+    <h1> Hi here you see the Projects</h1>
+    {% for project in projects %}
     <div>
         <img src="{{project.image.url}}" alt="">
         {{project.title}}
@@ -17,46 +18,18 @@
         {{project.approved}}
     </div>
     {% endfor %}
-    <h1> Testbeds</h1>
-    {% for project in Test_beds %}
-        <div>
-            <img src="{{project.image.url}}" alt="">
-            {{project.title}}
-            (<a href="{{project.link}}">{{project.link}}</a>)
-            {{project.description}}
-            {{project.approved}}
-        </div>
-    {% endfor %}
 </body>
+
 </html> -->
 
 
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-<title>Hello</title>
-</head>
-<body>
 
-<div class="super_container">
 
-	<header class="header">
-		<nav class="main_nav">
-			<ul class="d-flex flex-row align-items-start justify-content-start">
-			<li class="active"><a href="index.html">Home</a></li>
-			<li><a href="contact.html">Contact</a></li>
-			<li><a href="register">Signup</a></li>
-			<li><a href="login">Login</a></li>
-			<li><a href="news">News</a></li>
-			<li><a href="projects">Projects</a></li>
-			<li><a href="tools">Tools</a></li>
-			</ul>
-		</nav>
-		
-</div>
 
-</body>
-</html> -->
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -132,11 +105,17 @@
       overflow-y: visible !important;
     }
 
+    body.modal-active-project {
+      overflow-x: hidden;
+      overflow-y: visible !important;
+    }
+
     .modal-container {
       border-color: #ff4d4d;
     }
 
-    .loginButton {
+    .loginButton,
+    .loginButton:hover {
       background-color: #ff4d4d;
     }
 
@@ -149,6 +128,10 @@
     header,
     .background-gray {
       background-color: #F3F3F3;
+    }
+
+    .card-width {
+      width: 48%
     }
   </style>
 </head>
@@ -197,7 +180,24 @@
   <div class="w-full flex flex-col h-screen overflow-y-hidden main-div">
     <!-- Desktop Header -->
     <header class="w-full flex items-center py-4 px-6 hidden sm:flex header">
-      <div class="w-1/2 text-gray-700">Home
+      <!-- <div class="w-1/2 text-gray-700">
+        Projects
+      </div>
+      <button
+      class="loginButton d-block w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      type="button">
+      Login
+    </button> -->
+
+      <div class="w-1/2 flex justify-start">
+        <div class="text-gray-700 mr-4">
+          Projects
+        </div>
+        <button
+          class="loginButton w-48 text-white py-1 px-4 rounded focus:outline-none focus:shadow-outline add-new-project"
+          type="button">
+          Add New Project
+        </button>
       </div>
       <div class="w-1/2 flex justify-end">
         <button class="mr-6 modal-open">Login</button>
@@ -251,14 +251,147 @@
 
 
     <div class="w-full overflow-x-hidden border-t flex flex-col">
-      
+      <div class="w-full flex-grow px-6 background-gray">
+        <div class="flex flex-wrap mt-6">
+          <p class="text-md text-gray-700 pb-3 flex items-center">
+            IEC 61499 has been in the focus of many international and national research projects, starting from the
+            Holonic Manufacturing Systems (HMS) in 1996-2004 and extending to the ongoing European projects.
+          </p>
+          <p class="text-md text-gray-700 pb-3 flex items-center">Some of which are as follows:</p>
+        </div>
+      </div>
 
 
+      <div class="w-full flex-grow px-6 background-gray ">
+        <div class="flex flex-wrap">
+          <div class="card-width">
+            <div class="lg:max-w-full lg:flex">
+              <div class="w-1/2">
+                <img class=" object-fill h-48" src="./../media/bg-signup.png">
+              </div>
+
+              <div class="bg-white mb-8 h-48 w-1/2">
+                <div class="flex flex-wrap">
+                  <div class="w-full p-3">
+                    <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2">2020</p>
+                    <p class="text-sm flex items-center text-blue-500 font-semibold mt-3">
+                      OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
+                      architecture
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-width ml-3">
+            <div class="lg:max-w-full lg:flex">
+              <div class="w-1/2">
+                <img class=" object-fill h-48" src="./../media/bg-signup.png">
+              </div>
+
+              <div class="bg-white mb-8 h-48 w-1/2">
+                <div class="flex flex-wrap">
+                  <div class="w-full p-3">
+                    <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2">2020</p>
+                    <p class="text-sm flex items-center text-blue-500 font-semibold mt-3">
+                      OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
+                      architecture
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full flex-grow px-6 background-gray">
+        <div class="flex flex-wrap">
+          <div class="card-width">
+            <div class="lg:max-w-full lg:flex">
+              <div class="w-1/2">
+                <img class=" object-fill h-48" src="./../media/bg-signup.png">
+              </div>
+
+              <div class="bg-white mb-8 h-48 w-1/2">
+                <div class="flex flex-wrap">
+                  <div class="w-full p-3">
+                    <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2">2020</p>
+                    <p class="text-sm flex items-center text-blue-500 font-semibold mt-3">
+                      OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
+                      architecture
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-width ml-3">
+            <div class="lg:max-w-full lg:flex">
+              <p class="text-gray-700 text-sm">There have been many laboratories worldwide where IEC 61499 has been
+                proven, at universities of Halle
+                (Germany), Vienna (Austria), TU Kaiserslautern (Germany), Auckland (New Zealand), Tampere (Finland),
+                Aalto(Finland), Lulea(Sweden), Linz(Austria). </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
+      <main class="w-full flex-grow p-6 border-b border-gray-400">
+        <p class="text-2xl text-gray-700 pb-3 flex items-center">
+          Student Projects
+        </p>
+
+        <p class="text-md text-gray-700 mb-3">Master thesis: <a class="text-blue-500"
+            href="https://aaltodoc.aalto.fi/handle/123456789/27893">
+            Performance in Distributed Automation Applications: Estimation and Improvement</a>&nbsp;</p>
+
+        <p class="text-md text-gray-700">Master thesis: <a class="text-blue-500"
+            href="https://aaltodoc.aalto.fi/handle/123456789/37120">Portability of IEC 61499 compliant
+            software&nbsp;</a></p>
+
+      </main>
 
 
+      <main class="w-full flex-grow p-6 border-b border-gray-400">
+        <p class="text-2xl text-gray-700 pb-3 flex items-center">
+          Testbeds
+        </p>
+        <p class="text-md text-gray-700">One of the first, the Automation Technology Lab at U.Halle consisted of 2
+          different test beds. These test beds are heterogeneously controlled, combining both IEC 61131 and IEC 61499
+          Standards. This is to present feasible solutions for parallel existence of the Standards in Automation
+          Systems. Furthermore, several systematic design approaches have been implemented.</p>
 
+        <div class="w-full mt-3">
+          <div class="lg:max-w-full lg:flex">
+            <div class="w-2/12"></div>
+            <div class="w-1/2">
+              <div class="m-6 text-md text-gray-700 border border-gray-400 mb-3 flex-1 text-center">
+                FESTO- Modular Production
+                System
+              </div>
+              <a target="_blank" href="http://aut.informatik.uni-halle.de/forschung/testbed/"> <img
+                  src="./../media/festo-demonstrator+wago_en_klein.png"
+                  alt=" FESTO - Modular Production System at the MLU"></a>
+            </div>
+            <div class="w-2/12"></div>
+            <div class="w-1/2">
+              <div class="m-6 text-md text-gray-700 border border-gray-400 mb-3 flex-1 text-center">FESTO- Modular
+                Production
+                System
+              </div>
+              <a target="_blank" href="http://aut.informatik.uni-halle.de/forschung/testbed/"> <img
+                  src="./../media/testbed_klein.jpg" alt=" FESTO - Modular Production System at the MLU"></a>
+            </div>
+            <div class="w-2/12"></div>
+          </div>
+
+        </div>
+
+      </main>
 
 
       <footer class="w-full border-t flex flex-col border border-gray-400 bg-white">
@@ -376,6 +509,119 @@
       </div>
     </div>
 
+    <!--Add new project modal-->
+
+    <div
+      class="modal-project opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+      <div class="modal-overlay-project absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+      <div
+        class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto border-t-2">
+
+        <div
+          class="modal-close-project absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+          <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+            viewBox="0 0 18 18">
+            <path
+              d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+            </path>
+          </svg>
+          <span class="text-sm">(Esc)</span>
+        </div>
+
+        <div class="modal-content py-4 text-left px-6">
+          <!--Title-->
+          <div class="flex justify-between items-center pb-3">
+            <p class="text-2xl text-gray-700">Add New project</p>
+            <div class="modal-close-project cursor-pointer z-50">
+              <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                viewBox="0 0 18 18">
+                <path
+                  d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+                </path>
+              </svg>
+            </div>
+          </div>
+
+          <div class="w-full max-w-md">
+            <form class="bg-white">
+              <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                  Title
+                </label>
+                <input
+                  class="border border-gray-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="title" type="text" placeholder="Title Name">
+              </div>
+              <div class="mb-6">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                  Description
+                </label>
+                <textarea
+                  class="resize border border-gray-400 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                  id="description" type="text" placeholder="Description">
+               </textarea>
+              </div>
+
+
+              <div class="mb-6 bg-gray-200 h-32 flex items-center justify-center">
+                <!-- <div class=""> -->
+                <div class="text-sm">
+                  <div class="text-red-500 text-sm p-3">
+                    <i class="fa fa-upload ml-5"></i>
+                    <p class="text-gray-700 text-sm flex items-center justify-center mr-2 mt-2">or</p>
+                  </div>
+
+
+
+                  <div class="text-black font-black text-sm p-3">
+                    <button class="loginButton text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                      type="button">
+                      Browse
+                    </button>
+                  </div>
+                </div>
+                <!-- </div> -->
+              </div>
+
+
+
+              <div class="mb-6">
+                <label class="block tracking-wide text-gray-700 text-xs font-bold mb-2">
+                  Category
+                </label>
+                <div class="relative mb-4">
+                  <select
+                    class="bg-white block appearance-none w-48 border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    id="grid-state">
+                    <option>Choose</option>
+                    <option>New Mexico</option>
+                    <option>Missouri</option>
+                    <option>Texas</option>
+                  </select>
+                </div>
+
+
+                <div class="flex items-center justify-center">
+                  <button
+                    class=" border border-red-500 text-black py-1 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
+                    type="button">
+                    Save
+                  </button>
+
+                  <button class="loginButton  text-white py-1 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="button">
+                    Cancel
+                  </button>
+
+                </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!---sign up modal-->
     <div
       class="modal-sign opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
@@ -481,11 +727,24 @@
         })
       }
 
+      var addNewProject = document.querySelectorAll('.add-new-project')
+      for (var i = 0; i < addNewProject.length; i++) {
+        addNewProject[i].addEventListener('click', function (event) {
+          event.preventDefault()
+          openAddProjectModal()
+        })
+      }
+
+
+
       const overlay = document.querySelector('.modal-overlay')
       overlay.addEventListener('click', toggleModal)
 
       const overlay_sign = document.querySelector('.modal-overlay-sign')
       overlay_sign.addEventListener('click', toggleModalSignUp)
+
+      const overlayProject = document.querySelector('.modal-overlay-project')
+      overlayProject.addEventListener('click', openAddProjectModal)
 
       var closemodal = document.querySelectorAll('.modal-close')
       for (var i = 0; i < closemodal.length; i++) {
@@ -495,6 +754,12 @@
       var closemodal_sign = document.querySelectorAll('.modal-close-sign')
       for (var i = 0; i < closemodal_sign.length; i++) {
         closemodal_sign[i].addEventListener('click', toggleModalSignUp)
+      }
+
+
+      var closemodalProject = document.querySelectorAll('.modal-close-project')
+      for (var i = 0; i < closemodalProject.length; i++) {
+        closemodalProject[i].addEventListener('click', openAddProjectModal)
       }
 
       document.onkeydown = function (evt) {
@@ -523,6 +788,19 @@
         }
       };
 
+      document.onkeydown = function (evt) {
+        evt = evt || window.event
+        var isEscape = false
+        if ("key" in evt) {
+          isEscape = (evt.key === "Escape" || evt.key === "Esc")
+        } else {
+          isEscape = (evt.keyCode === 27)
+        }
+        if (isEscape && document.body.classList.contains('modal-active-project')) {
+          openAddProjectModal()
+        }
+      };
+
 
       function toggleModal() {
         const body = document.querySelector('body')
@@ -539,6 +817,16 @@
         modal.classList.toggle('pointer-events-none')
         body.classList.toggle('modal-active-sign')
       }
+
+      function openAddProjectModal() {
+        const body = document.querySelector('body')
+        const modal = document.querySelector('.modal-project')
+        modal.classList.toggle('opacity-0')
+        modal.classList.toggle('pointer-events-none')
+        body.classList.toggle('modal-active-project')
+      }
+
+
 
     </script>
 </body>
