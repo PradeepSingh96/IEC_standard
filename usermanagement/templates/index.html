@@ -175,11 +175,15 @@
       </div>
 
       {% if user.is_authenticated %}
+<!--      <form method="post" action="http://127.0.0.1:8000/logout/">-->
+        {% csrf_token %}
       <div class="w-1/2 flex justify-end">
         Hello {{user.name}}
-        <button class="mr-6 modal-open">Logout</button>
+        <button class="mr-6" type="submit">Logout</button>
+
 <!--        <button class="modal-open-sign">Signup</button>-->
       </div>
+<!--      </form>-->
       {% else %}
       <div class="w-1/2 flex justify-end">
         <button class="mr-6 modal-open">Login</button>
