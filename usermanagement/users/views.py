@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+
 User = get_user_model()
 
 
@@ -145,7 +146,8 @@ def news(request):
 def projects(request):
     if request.method == "GET":
 
-        Student_projects = Projects.objects.filter(approved=True, category='Student_projects').all().order_by('-modified_at')
+        Student_projects = Projects.objects.filter(approved=True, category='Student_projects').all().order_by(
+            '-modified_at')
         Test_beds = Projects.objects.filter(approved=True, category='Test_beds').all().order_by('-modified_at')
 
         return render(request, 'projects.html', {'Student_projects': Student_projects, 'Test_beds': Test_beds})
@@ -157,13 +159,16 @@ def projects(request):
 def tools(request):
     if request.method == "GET":
 
-        Commercial_tools_with_PLC_hardware_support = Tools.objects.filter(category='Commercial_tools_with_PLC_hardware_support').all().order_by('-modified_at')
+        Commercial_tools_with_PLC_hardware_support = Tools.objects.filter(
+            category='Commercial_tools_with_PLC_hardware_support').all().order_by('-modified_at')
         Open_source_tools = Tools.objects.filter(category='Open_source_tools').all().order_by('-modified_at')
-        Academic_and_research_developments = Tools.objects.filter(category='Academic_and_research_developments').all().order_by('-modified_at')
+        Academic_and_research_developments = Tools.objects.filter(
+            category='Academic_and_research_developments').all().order_by('-modified_at')
 
-        return render(request, 'tools.html', {'Commercial_tools_with_PLC_hardware_support': Commercial_tools_with_PLC_hardware_support,
-                                              'Open_source_tools': Open_source_tools,
-                                              'Academic_and_research_developments': Academic_and_research_developments})
+        return render(request, 'tools.html',
+                      {'Commercial_tools_with_PLC_hardware_support': Commercial_tools_with_PLC_hardware_support,
+                       'Open_source_tools': Open_source_tools,
+                       'Academic_and_research_developments': Academic_and_research_developments})
     else:
         return render(request, 'tools.html')
 
@@ -180,7 +185,7 @@ def add_project(request):
 
         fs = FileSystemStorage(location='media/projects/')
         fs.save(myfile.name, myfile)
-        uploaded_file_url = 'projects/'+myfile.name
+        uploaded_file_url = 'projects/' + myfile.name
 
         project = Projects(title=title, link=link, description=description, category=category, image=uploaded_file_url)
         project.save()
@@ -189,6 +194,31 @@ def add_project(request):
         return render(request, 'add_project.html')
 
 
+# Logout
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+
+# imprint
+def imprint(request):
+    if request.method == "GET":
+        return render(request, 'imprint.html')
+    else:
+        return render(request, 'imprint.html')
+
+
+# publications
+def publications(request):
+    if request.method == "GET":
+        return render(request, 'publication.html')
+    else:
+        return render(request, 'publication.html')
+
+
+# resources
+def resources(request):
+    if request.method == "GET":
+        return render(request, 'resources.html')
+    else:
+        return render(request, 'resources.html')
