@@ -1,128 +1,32 @@
 <!-- <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tools</title>
-
-    <style>
-        h1 {
-            text-align:center;
-        }
-        h3 {
-            text-align:center;
-            color: blue;
-        }
-        body {
-            width:70%;
-        }
-        .container .box {
-            width:540px;
-            margin:50px;
-            display:table;
-        }
-        .container .box .box-row {
-            display:table-row;
-        }
-        .container .box .box-cell {
-            display:table-cell;
-            width:50%;
-            padding:10px;
-
-        }
-        .container .box .box-cell.box1 {
-
-            color:white;
-            text-align:justify;
-         }
-        .container .box .box-cell.box2 {
-            background:lightgreen;
-            text-align:justify;
-            margin-top: 0px;
-        }
-    </style>
-
-</head>
-<body>
-    <h2> Commercial_tools_with_PLC_hardware_support</h2>
-    {% for tool in Commercial_tools_with_PLC_hardware_support %}
-    <div class="container">
-        <div class="box">
-            <div class="box-row">
-                <div class="box-cell box1">
-                    <img src="{{tool.image.url}}" alt="">
-                </div>
-                <div class="box-cell box2">
-                    <h3>{{tool.title}}</h3> (<a href="{{tool.link}}">{{tool.link}}</a>)
-                    {{tool.description}}
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-
-    <h2> Open_source_tools</h2>
-        {% for tool in Open_source_tools %}
-        <div class="container">
-            <div class="box">
-                <div class="box-row">
-                    <div class="box-cell box1">
-                        <img src="{{tool.image.url}}" alt="">
-                    </div>
-                    <div class="box-cell box2">
-                        <h3>{{tool.title}}</h3> (<a href="{{tool.link}}">{{tool.link}}</a>)
-                        {{tool.description}}
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endfor %}
-
-
-    <h2> Academic_and_research_developments</h2>
-        {% for tool in Academic_and_research_developments %}
-        <div class="container">
-            <div class="box">
-                <div class="box-row">
-                    <div class="box-cell box1">
-                        <img src="{{tool.image.url}}" alt="">
-                    </div>
-                    <div class="box-cell box2">
-                        <h3>{{tool.title}}</h3> (<a href="{{tool.link}}">{{tool.link}}</a>)
-                        {{tool.description}}
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endfor %}
-
-</body>
-</html> -->
-
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
 <title>Hello</title>
 </head>
 <body>
 
 <div class="super_container">
-
+		{% csrf_token %}
 	<header class="header">
 		<nav class="main_nav">
 			<ul class="d-flex flex-row align-items-start justify-content-start">
 			<li class="active"><a href="index.html">Home</a></li>
 			<li><a href="contact.html">Contact</a></li>
+
+			{% if user.is_authenticated %}
+				<li>Hello,{{user.name}}</li>
+				<li><a href="logout">Logout</a></li>
+			{% else %}
 			<li><a href="register">Signup</a></li>
 			<li><a href="login">Login</a></li>
+			{% endif %}
+
 			<li><a href="news">News</a></li>
 			<li><a href="projects">Projects</a></li>
 			<li><a href="tools">Tools</a></li>
 			</ul>
 		</nav>
-		
+
 </div>
 
 </body>
@@ -267,7 +171,7 @@
   <div class="w-full flex flex-col h-screen overflow-y-hidden main-div">
     <!-- Desktop Header -->
     <header class="w-full flex items-center py-4 px-6 hidden sm:flex header">
-      <div class="w-1/2 text-gray-700 font-bold">IEC 61499-2 compliant development environment
+      <div class="w-1/2 text-gray-700">Home
       </div>
       <div class="w-1/2 flex justify-end">
         <button class="mr-6 modal-open">Login</button>
@@ -319,101 +223,79 @@
       </nav>
     </header>
 
+
     <div class="w-full overflow-x-hidden border-t flex flex-col">
-      
-    <main class="w-full flex-grow p-6 border-b border-gray-600">
-        <p class="text-2xl text-gray-700 pb-3 flex items-center">
-            Commercial  tools with PLC hardware support
-          </p>
-        <div class="flex flex-wrap ">
-            <div class="w-2/5">
-                <!--Add image here-->
-                <img src="./../media/bg-signup.png">
+      <main class="w-full flex-grow p-6 bg-white">
+
+
+        <div class="flex items-center justify-center w-full md:w-1/3 mx-auto h-64">
+          <div class="mx-5 my-3 text-sm">
+            <div class="text-black font-black text-4xl ">
+              Lorem ipsum dolor sit amet, consectetur
             </div>
-            <div class="lg:w-3/5">
-                <div class="p-4 bg-white border border-gray-200 shadow-md">
-                    <div class="flex flex-wrap">
-                        <div class="w-full">
-                            <p class="text-blue-500 font-semibold text-sm border-l-2 border-yellow-400 pl-2">2020</p>
-                            <p class="text-sm flex items-center text-gray-700 mt-3 ml-3">
-                                OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
-                                architecture
-                            
-                            <ul class="list-disc text-gray-700 ml-4 mt-3 text-sm">
-                                <li>Ported to hundreds of hardware platforms</li>
-                            </ul>
-                        </p>
-                        </div>
-                    </div>
-                </div>
-              
-            </div>
+          </div>
         </div>
-    </main>
+      </main>
 
 
-    <main class="w-full flex-grow p-6 border-b border-gray-600">
-        <p class="text-2xl text-gray-700 pb-3 flex items-center">
-            Commercial  tools with PLC hardware support
-          </p>
-        <div class="flex flex-wrap ">
-            <div class="w-2/5">
-                <!--Add image here-->
-                <img src="./../media/bg-signup.png">
+      <div class="w-full flex-grow p-6 background-gray">
+        <div class="flex flex-wrap mt-6">
+          <div class="w-full lg:w-1/2 pr-0 lg:pr-2">
+            <p class="text-2xl text-gray-700 pb-3 flex items-center">
+              The Standard
+            </p>
+            <div class="text-gray-700">
+              The IEC61499 architecture represents a component solution for distributed industrial automation systems
+              aiming at portability, reusability interoperability, reconfiguration of distributed applications. The IEC
+              61499 Standard provides a generic model for distributed systems. This model includes processes and
+              communication networks as an environment for embedded devices, resources and applications. Applications
+              are built by networks of Function Blocks.
             </div>
-            <div class="lg:w-3/5">
-                <div class="p-4 bg-white border border-gray-200 shadow-md">
-                    <div class="flex flex-wrap">
-                        <div class="w-full">
-                            <p class="text-blue-500 font-semibold text-sm border-l-2 border-yellow-400 pl-2">2020</p>
-                            <p class="text-sm flex items-center text-gray-700 mt-3 ml-3">
-                                OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
-                                architecture
-                            
-                            <ul class="list-disc text-gray-700 ml-4 mt-3 text-sm">
-                                <li>Ported to hundreds of hardware platforms</li>
-                            </ul>
-                        </p>
-                        </div>
-                    </div>
-                </div>
-              
+          </div>
+          <div class="w-full lg:w-1/2 pl-0 lg:pl-2 mt-12 lg:mt-0">
+            <div class="">
+              <!--image tag-->
             </div>
+          </div>
         </div>
-    </main>
-
-
-    <main class="w-full flex-grow p-6">
-        <p class="text-2xl text-gray-700 pb-3 flex items-center">
-            Academic research and development
-          </p>
-        <div class="flex flex-wrap ">
-            <div class="w-2/5">
-                <!--Add image here-->
-                <img src="./../media/bg-signup.png">
-            </div>
-            <div class="lg:w-3/5">
-                <div class="p-4 bg-white border border-gray-200 shadow-md">
-                    <div class="flex flex-wrap">
-                        <div class="w-full">
-                            <p class="text-blue-500 font-semibold text-sm border-l-2 border-yellow-400 pl-2">2020</p>
-                            <p class="text-sm flex items-center text-gray-700 mt-3 ml-3">
-                                OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
-                                architecture
-                            
-                            <ul class="list-disc text-gray-700 ml-4 mt-3 text-sm">
-                                <li>Ported to hundreds of hardware platforms</li>
-                            </ul>
-                        </p>
-                        </div>
-                    </div>
-                </div>
-              
-            </div>
+        <div class="flex flex-wrap mt-6 text-gray-700">
+          The Function Block is the elementary model of the IEC 61499 Standard. A Function Block generally provides an
+          Interface for Event I/O’s and Data I/O’s. There are two types of Function Blocks. Basic Function Blocks on the
+          one hand and Composite Function Blocks on the other. A Composite Function Block can contain other Composite
+          Function Blocks and/or Basic Function Blocks. Thus, Composite Function Blocks enable modular design
+          methodologies. Basic Function Blocks include event-driven Execution Control Charts (abbr. ECC), which are
+          state machines. The elements of the ECC are states and event-triggered transitions. An ECC can trigger the
+          execution of Algorithms by the occurrence of events.
         </div>
-    </main>
+
+        <div class="flex flex-wrap mt-6">
+          <div class="w-full lg:w-1/2 pr-0 lg:pr-2">
+            <p class="text-2xl text-gray-700 pb-3 flex items-center">
+              IEC 61499 provides
+            </p>
+
+            <div class="max-w-xs rounded overflow-hidden shadow-lg">
+
+              <div class="px-6 py-4">
+
+                <!--Add image here-->
+              </div>
+              <div class="px-6 py-4 bg-white">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et
+                perferendis eaque, exercitationem praesentium nihil.
+              </div>
+            </div>
 
 
+          </div>
+        </div>
+
+        <div class="flex flex-wrap mt-6 text-gray-700">
+          Keywords:industrial automation;distributed control;automation objects;function block
+        </div>
+        </main>
+
+      </div>
       <footer class="w-full border-t flex flex-col border border-gray-400 bg-white">
 
         <main class="w-full flex-grow p-4 ">
