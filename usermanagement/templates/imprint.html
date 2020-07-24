@@ -176,7 +176,7 @@
   <div class="w-full flex flex-col h-screen overflow-y-hidden main-div">
     <!-- Desktop Header -->
     <header class="w-full flex items-center py-4 px-6 hidden sm:flex header">
-      <div class="w-1/2 text-gray-700">Imprint
+      <div class="w-1/2 text-gray-700 font-bold text-xl">IMPRINT
       </div>
       <div class="w-1/2 flex justify-end">
         <button class="mr-6 modal-open">Login</button>
@@ -246,33 +246,38 @@
       <main class="w-full flex-grow p-6 border-b border-gray-600">
         <p class="text-2xl text-gray-700 mb-4">Disclaimer</p>
         <p class="text-xl text-gray-700 mb-3">Content</p>
-        <p class="text-sm text-gray-700 mb-6">The author reserves the right not to be responsible for the topicality,
+        <p class="text-sm text-gray-700 mb-6 tracking-tighter">The author reserves the right not to be responsible for
+          the topicality,
           correctness, completeness or quality of the information provided. Liability claims regarding damage caused by
           the use of any information provided, including any kind of information which is incomplete or incorrect, will
           therefore be rejected. All offers are not-binding and without obligation. Parts of the pages or the complete
           publication including all offers and information might be extended, changed or partly or completely deleted by
           the author without separate announcement.</p>
         <p class="text-xl text-gray-700 mb-3">Referrals and links</p>
-        <p class="text-sm text-gray-700 mb-6">The author is not responsible for any contents linked or referred to from
+        <p class="text-sm text-gray-700 mb-6 tracking-tighter">The author is not responsible for any contents linked or
+          referred to from
           his pages - unless he has full knowledge of illegal contents and would be able to prevent the visitors of his
           site from viewing those pages. If any damage occurs by the use of information presented there, only the author
           of the respective pages might be liable, not the one who has linked to these pages. Furthermore the author is
           not liable for any postings or messages published by users of discussion boards, guest books or mailing lists
           provided on his page.</p>
         <p class="text-xl text-gray-700 mb-3">Copyright</p>
-        <p class="text-sm text-gray-700 mb-6">The author intended not to use any copyrighted material for the
+        <p class="text-sm text-gray-700 mb-6 tracking-tighter">The author intended not to use any copyrighted material
+          for the
           publication or, if not possible, to indicate the copyright of the respective object. The copyright for any
           material created by the author is reserved. Any duplication or use of objects such as images, diagrams, sounds
           or texts in other electronic or printed publications is not permitted without the author's agreement.</p>
         <p class="text-xl text-gray-700 mb-3">Privacy policy</p>
-        <p class="text-sm text-gray-700 mb-6">If the opportunity for the input of personal or business data (email
+        <p class="text-sm text-gray-700 mb-6 tracking-tighter">If the opportunity for the input of personal or business
+          data (email
           addresses, name, and addresses) is given, the input of these data takes place voluntarily. The use and payment
           of all offered services are permitted - if and so far technically possible and reasonable - without
           specification of any personal data or under specification of anonymized data or an alias. The use of published
           postal addresses, telephone or fax numbers and email addresses for marketing purposes is prohibited; offenders
           sending unwanted spam messages will be punished.</p>
         <p class="text-xl text-gray-700 mb-3"> Legal validity of this disclaimer</p>
-        <p class="text-sm text-gray-700 mb-6">This disclaimer is to be regarded as part of the internet publication
+        <p class="text-sm text-gray-700 mb-6 tracking-tighter">This disclaimer is to be regarded as part of the internet
+          publication
           which you were referred from. If sections or individual terms of this statement are not legal or correct, the
           content or validity of the other parts remain uninfluenced by this fact.</p>
       </main>
@@ -481,7 +486,20 @@
 
     <script>
 
+// Get the container element
+var btnContainer = document.getElementsByClassName("navbar");
 
+// Get all buttons with class="btn" inside the container
+var btns = btnContainer.getElementsByClassName("nav-item");
+
+// Loop through the buttons and add the active class to the current/clicked button
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function () {
+    var current = document.getElementsByClassName("active-nav-link");
+    current[0].className = current[0].className.replace(" active-nav-link", "");
+    this.className += " active-nav-link";
+  });
+}
       //for modal
       var openmodal = document.querySelectorAll('.modal-open')
       for (var i = 0; i < openmodal.length; i++) {

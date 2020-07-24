@@ -135,7 +135,9 @@
       <div class="text-white text-xs">The new standard in automation</div class="">
 
     </div>
-    <nav class="text-white text-base font-semibold pt-3">
+
+
+    <nav class="text-white text-base font-semibold pt-3 navbar">
       <a href="{{ BASE_URL }}/" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
         <i class="fas fa-home mr-3"></i>
         HOME
@@ -177,7 +179,7 @@
   <div class="w-full flex flex-col h-screen overflow-y-hidden main-div">
     <!-- Desktop Header -->
     <header class="w-full flex items-center py-4 px-6 hidden sm:flex header">
-      <div class="w-1/2 text-gray-700">Home
+      <div class="w-1/2 text-gray-700 font-bold text-xl">Home
       </div>
 
       {% if user.is_authenticated %}
@@ -571,6 +573,20 @@
 
 
     <script>
+      // Get the container element
+      var btnContainer = document.getElementsByClassName("navbar");
+
+      // Get all buttons with class="btn" inside the container
+      var btns = btnContainer.getElementsByClassName("nav-item");
+
+      // Loop through the buttons and add the active class to the current/clicked button
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener("click", function () {
+          var current = document.getElementsByClassName("active-nav-link");
+          current[0].className = current[0].className.replace(" active-nav-link", "");
+          this.className += " active-nav-link";
+        });
+      }
 
 
       //for modal
