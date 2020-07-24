@@ -16,7 +16,27 @@ User = get_user_model()
 
 
 def index(request):
-    return render(request, 'index.html')
+
+    if request.method == 'POST':
+        import pdb;
+        pdb.set_trace()
+        email = request.POST['email']
+        password = request.POST['password']
+        user_email = User.objects.filter(email=email)
+        if len(user_email) == 0:
+            messages.info(request, 'email is not registered')
+            return redirect('login')
+        user = auth.authenticate(email=email, password=password)
+        if user is not None:
+            auth.login(request, user)
+            update_last_login(None, user)
+            return redirect('/')
+        else:
+            messages.info(request, 'invalid credentials')
+            return redirect('login')
+
+    else:
+        return render(request, 'index.html')
 
 
 # User Register
@@ -34,11 +54,11 @@ def register(request):
             else:
                 user = User.objects.create_user(name=name, password=password1, email=email)
                 print("user created")
-                return redirect('login')
+                return redirect('/')
         else:
             print('password not matching....')
             messages.info(request, 'password not matched')
-            return redirect('register')
+            return redirect('/')
 
     else:
         return render(request, 'register.html')
@@ -47,13 +67,13 @@ def register(request):
 # user login
 def login(request):
     if request.method == 'POST':
-
+        # import pdb;pdb.set_trace()
         email = request.POST['email']
         password = request.POST['password']
         user_email = User.objects.filter(email=email)
         if len(user_email) == 0:
             messages.info(request, 'email is not registered')
-            return redirect('login')
+            return redirect('/')
         user = auth.authenticate(email=email, password=password)
         if user is not None:
             auth.login(request, user)
@@ -61,7 +81,7 @@ def login(request):
             return redirect('/')
         else:
             messages.info(request, 'invalid credentials')
-            return redirect('login')
+            return redirect('/')
 
     else:
         return render(request, 'login.html')
@@ -189,9 +209,9 @@ def add_project(request):
 
         project = Projects(title=title, link=link, description=description, category=category, image=uploaded_file_url)
         project.save()
-        return redirect('add_project')
+        return redirect('/')
     else:
-        return render(request, 'add_project.html')
+        return render(request, '/')
 
 
 # Logout

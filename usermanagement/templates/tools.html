@@ -97,42 +97,40 @@
 
   <aside class="relative bg-sidebar h-screen w-1/4 hidden sm:block shadow-xl">
     <div class="p-6">
-      <a href="http://127.0.0.1:8000/" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">IEC
-        61499</a>
+      <a href="{{BASE_URL}}/" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">IEC 61499</a>
       <div class="text-white text-xs">The new standard in automation</div class="">
 
     </div>
     <nav class="text-white text-base font-semibold pt-3">
-      <a href="http://127.0.0.1:8000/" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+      <a href="{{BASE_URL}}/" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
         <i class="fas fa-home mr-3"></i>
         HOME
       </a>
-      <a href="http://127.0.0.1:8000/news/"
-        class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+      <a href="{{BASE_URL}}/news/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
         <i class="fas fa-newspaper mr-3"></i>
         NEWS
       </a>
-      <a href="http://127.0.0.1:8000/projects/"
+      <a href="{{BASE_URL}}/projects/"
         class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
         <i class="fas fa-tasks mr-3"></i>
         PROJECTS
       </a>
-      <a href="http://127.0.0.1:8000/publications/"
+      <a href="{{BASE_URL}}/publications/"
         class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
         <i class="fas fa-volume-up mr-3"></i>
         PUBLICATIONS
       </a>
-      <a href="http://127.0.0.1:8000/tools/"
+      <a href="{{BASE_URL}}/tools/"
         class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
         <i class="fas fa-cog mr-3"></i>
         TOOLS
       </a>
-      <a href="http://127.0.0.1:8000/resources/"
+      <a href="{{BASE_URL}}/resources/"
         class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
         <i class="fas fa-link mr-3"></i>
         RESOURCES
       </a>
-      <a href="http://127.0.0.1:8000/imprint/"
+      <a href="{{BASE_URL}}/imprint/"
         class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
         <i class="fas fa-copyright mr-3"></i>
         IMPRINT
@@ -156,8 +154,7 @@
     <!-- Mobile Header & Nav -->
     <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 sm:hidden">
       <div class="flex items-center justify-between">
-        <a href="http://127.0.0.1:8000/"
-          class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
+        <a href="{{BASE_URL}}/" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
         <button @click="isOpen = !isOpen" class="text-white text-3xl focus:outline-none">
           <i x-show="!isOpen" class="fas fa-bars"></i>
           <i x-show="isOpen" class="fas fa-times"></i>
@@ -166,36 +163,36 @@
 
       <!-- Dropdown Nav -->
       <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
-        <a href="http://127.0.0.1:8000/" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+        <a href="{{BASE_URL}}/" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
           <i class="fas fa-home mr-3"></i>
           HOME
         </a>
-        <a href="http://127.0.0.1:8000/news/"
+        <a href="{{BASE_URL}}/news/"
           class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
           <i class="fas fa-newspaper mr-3"></i>
           NEWS
         </a>
-        <a href="http://127.0.0.1:8000/projects/"
+        <a href="{{BASE_URL}}/projects/"
           class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
           <i class="fas fa-tasks mr-3"></i>
           PROJECTS
         </a>
-        <a href="http://127.0.0.1:8000/publications/"
+        <a href="{{BASE_URL}}/publications/"
           class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
           <i class="fas fa-volume-up mr-3"></i>
           PUBLICATIONS
         </a>
-        <a href="http://127.0.0.1:8000/tools/"
+        <a href="{{BASE_URL}}/tools/"
           class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
           <i class="fas fa-cog mr-3"></i>
           TOOLS
         </a>
-        <a href="http://127.0.0.1:8000/resources/"
+        <a href="{{BASE_URL}}/resources/"
           class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
           <i class="fas fa-link mr-3"></i>
           RESOURCES
         </a>
-        <a href="http://127.0.0.1:8000/imprint/"
+        <a href="{{BASE_URL}}/imprint/"
           class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
           <i class="fas fa-copyright mr-3"></i>
           IMPRINT
@@ -209,375 +206,384 @@
         <p class="text-2xl text-gray-700 pb-3 flex items-center">
           Commercial tools with PLC hardware support
         </p>
+        {% for i in Commercial_tools_with_PLC_hardware_support%}
         <div class="flex flex-wrap ">
           <div class="w-2/5">
             <!--Add image here-->
-            <img src="./../media/bg-signup.png">
+            <img src="{{i.image.url}}" alt="">
           </div>
           <div class="lg:w-3/5">
             <div class="p-4 bg-white border border-gray-200 shadow-md">
               <div class="flex flex-wrap">
                 <div class="w-full">
-                  <p class="text-blue-500 font-semibold text-sm border-l-2 border-yellow-400 pl-2">2020</p>
-                  <p class="text-sm flex items-center text-gray-700 mt-3 ml-3">
-                    OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
-                    architecture
+                  <p class="text-blue-500 font-semibold text-sm border-l-2 border-yellow-400 pl-2">{{i.title}}<a
+                      href="{{i.link}}">({{i.link}})</a></p>
+                  <p class="text-sm flex items-center text-gray-700 mt-3 ml-3"></a>
 
                     <ul class="list-disc text-gray-700 ml-4 mt-3 text-sm">
-                      <li>Ported to hundreds of hardware platforms</li>
+                      <li>{{i.description}}</li>
                     </ul>
                   </p>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
-      </main>
+
+    </div>
+  </div>
+  {% endfor %}
+  </main>
 
 
-      <main class="w-full flex-grow p-6 border-b border-gray-600">
-        <p class="text-2xl text-gray-700 pb-3 flex items-center">
-          Commercial tools with PLC hardware support
-        </p>
-        <div class="flex flex-wrap ">
-          <div class="w-2/5">
-            <!--Add image here-->
-            <img src="./../media/bg-signup.png">
-          </div>
-          <div class="lg:w-3/5">
-            <div class="p-4 bg-white border border-gray-200 shadow-md">
-              <div class="flex flex-wrap">
-                <div class="w-full">
-                  <p class="text-blue-500 font-semibold text-sm border-l-2 border-yellow-400 pl-2">2020</p>
-                  <p class="text-sm flex items-center text-gray-700 mt-3 ml-3">
-                    OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
-                    architecture
-
-                    <ul class="list-disc text-gray-700 ml-4 mt-3 text-sm">
-                      <li>Ported to hundreds of hardware platforms</li>
-                    </ul>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </main>
-
-
-      <main class="w-full flex-grow p-6">
-        <p class="text-2xl text-gray-700 pb-3 flex items-center">
-          Academic research and development
-        </p>
-        <div class="flex flex-wrap ">
-          <div class="w-2/5">
-            <!--Add image here-->
-            <img src="./../media/bg-signup.png">
-          </div>
-          <div class="lg:w-3/5">
-            <div class="p-4 bg-white border border-gray-200 shadow-md">
-              <div class="flex flex-wrap">
-                <div class="w-full">
-                  <p class="text-blue-500 font-semibold text-sm border-l-2 border-yellow-400 pl-2">2020</p>
-                  <p class="text-sm flex items-center text-gray-700 mt-3 ml-3">
-                    OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
-                    architecture
-
-                    <ul class="list-disc text-gray-700 ml-4 mt-3 text-sm">
-                      <li>Ported to hundreds of hardware platforms</li>
-                    </ul>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </main>
-
-
-      <footer class="w-full border-t flex flex-col border border-gray-400 bg-white">
-
-        <main class="w-full flex-grow p-4 ">
-
-
+  <main class="w-full flex-grow p-6 border-b border-gray-600">
+    <p class="text-2xl text-gray-700 pb-3 flex items-center">
+      Open source tools
+    </p>
+    {% for i in Open_source_tools%}
+    <div class="flex flex-wrap ">
+      <div class="w-2/5">
+        <!--Add image here-->
+        <img src="{{i.image.url}}" alt="">
+      </div>
+      <div class="lg:w-3/5">
+        <div class="p-4 bg-white border border-gray-200 shadow-md">
           <div class="flex flex-wrap">
-            <div class="w-full lg:w-1/2 my-6 pr-0 lg:pr-2">
-              <p class="text-xl flex items-center ">
+            <div class="w-full">
+              <p class="text-blue-500 font-semibold text-sm border-l-2 border-yellow-400 pl-2">{{i.title}}<a
+                  href="{{i.link}}">({{i.link}})</a></p>
+              <p class="text-sm flex items-center text-gray-700 mt-3 ml-3">
 
-                <p class="text-gray-700 text-xl mb-4">Follow Us</p>
-              </p>
-              <div class="leading-loose ml-3">
-                <i class="fab fa-twitter mr-6 text-gray-700"></i>
-                <i class="fab fa-facebook-f mr-6 text-gray-700"></i>
-                <i class="fab fa-linkedin mr-6 text-gray-700"></i>
-                <i class="fab fa-instagram text-gray-700"></i>
-              </div>
-            </div>
-            <div class="w-full lg:w-1/2 mt-6 pl-0 lg:pl-2">
-              <p class="text-xl flex items-center">
 
-                <p class="text-gray-700 text-xl">Contact</p>
+                <ul class="list-disc text-gray-700 ml-4 mt-3 text-sm">
+                  <li>{{i.description}}</li>
+                </ul>
               </p>
-              <div class="leading-loose">
-                <p class="text-xs text-gray-700">Tel:</p>
-                <p class="text-xs text-gray-700">Email:</p>
-                <p class="text-xs text-gray-700">Office:</p>
-                <p class="text-xs text-gray-700">Get directions:</p>
-              </div>
             </div>
           </div>
-
-
-        </main>
-
-      </footer>
+        </div>
+      </div>
     </div>
 
+    </div>
+    </div>
+    {% endfor %}
+  </main>
 
 
+  <main class="w-full flex-grow p-6">
+    <p class="text-2xl text-gray-700 pb-3 flex items-center">
+      Academic research and development
+    </p>
+    {% for i in Academic_and_research_developments%}
+    <div class="flex flex-wrap ">
+      <div class="w-2/5">
+        <!--Add image here-->
+        <img src="{{i.image.url}}" alt="">
+      </div>
+      <div class="lg:w-3/5">
+        <div class="p-4 bg-white border border-gray-200 shadow-md">
+          <div class="flex flex-wrap">
+            <div class="w-full">
+              <p class="text-blue-500 font-semibold text-sm border-l-2 border-yellow-400 pl-2">{{i.title}}<a
+                  href="{{i.link}}">({{i.link}})</a></p>
+              <p class="text-sm flex items-center text-gray-700 mt-3 ml-3">
 
-    <!--Modal-->
-    <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
-      <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
-      <div
-        class="modal-container bg-white w-11/12 md:max-w-xs mx-auto rounded shadow-lg z-50 overflow-y-auto border-t-2">
-
-        <div
-          class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
-          <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-            viewBox="0 0 18 18">
-            <path
-              d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
-            </path>
-          </svg>
-          <span class="text-sm">(Esc)</span>
-        </div>
-
-        <!-- Add margin if you want to see some of the overlay behind the modal-->
-        <div class="modal-content py-4 text-left px-6">
-          <!--Title-->
-          <div class="flex justify-between items-center pb-3">
-            <p class="text-2xl text-gray-700">Login</p>
-            <div class="modal-close cursor-pointer z-50">
-              <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                viewBox="0 0 18 18">
-                <path
-                  d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
-                </path>
-              </svg>
+                <ul class="list-disc text-gray-700 ml-4 mt-3 text-sm">
+                  <li>{{i.description}}</li>
+                </ul>
+              </p>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
 
-          <!--Body-->
-          <!-- <div class="leading-loose"> -->
-          <form class="bg-white">
-            <div class="mb-4">
+    </div>
+    </div>
+    {% endfor %}
+  </main>
 
-              <input
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="username" type="email" placeholder="Email">
-            </div>
-            <div class="mb-6">
 
-              <input
-                class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                id="password" type="password" placeholder="Password">
-              <a class="inline-block float-right align-baseline text-sm text-blue-500 hover:text-blue-800" href="#">
-                Forgot Password?
-              </a>
-              <!-- <p class="text-red-500 text-xs italic">Please choose a password.</p> -->
-            </div>
-            <div class="flex items-center justify-between d-block">
-              <button
-                class="loginButton d-block w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="button">
-                Login
-              </button>
-            </div>
-            <div class="text-xs mt-4">New to IEC61499?<a class="modal-open-sign
+  <footer class="w-full border-t flex flex-col border border-gray-400 bg-white">
+
+    <main class="w-full flex-grow p-4 ">
+
+
+      <div class="flex flex-wrap">
+        <div class="w-full lg:w-1/2 my-6 pr-0 lg:pr-2">
+          <p class="text-xl flex items-center ">
+
+            <p class="text-gray-700 text-xl mb-4">Follow Us</p>
+          </p>
+          <div class="leading-loose ml-3">
+            <i class="fab fa-twitter mr-6 text-gray-700"></i>
+            <i class="fab fa-facebook-f mr-6 text-gray-700"></i>
+            <i class="fab fa-linkedin mr-6 text-gray-700"></i>
+            <i class="fab fa-instagram text-gray-700"></i>
+          </div>
+        </div>
+        <div class="w-full lg:w-1/2 mt-6 pl-0 lg:pl-2">
+          <p class="text-xl flex items-center">
+
+            <p class="text-gray-700 text-xl">Contact</p>
+          </p>
+          <div class="leading-loose">
+            <p class="text-xs text-gray-700">Tel:</p>
+            <p class="text-xs text-gray-700">Email:</p>
+            <p class="text-xs text-gray-700">Office:</p>
+            <p class="text-xs text-gray-700">Get directions:</p>
+          </div>
+        </div>
+      </div>
+
+
+    </main>
+
+  </footer>
+  </div>
+
+
+
+
+  <!--Modal-->
+  <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+    <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+    <div class="modal-container bg-white w-11/12 md:max-w-xs mx-auto rounded shadow-lg z-50 overflow-y-auto border-t-2">
+
+      <div
+        class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+        <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+          viewBox="0 0 18 18">
+          <path
+            d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+          </path>
+        </svg>
+        <span class="text-sm">(Esc)</span>
+      </div>
+
+      <!-- Add margin if you want to see some of the overlay behind the modal-->
+      <div class="modal-content py-4 text-left px-6">
+        <!--Title-->
+        <div class="flex justify-between items-center pb-3">
+          <p class="text-2xl text-gray-700">Login</p>
+          <div class="modal-close cursor-pointer z-50">
+            <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+              viewBox="0 0 18 18">
+              <path
+                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+              </path>
+            </svg>
+          </div>
+        </div>
+
+        <!--Body-->
+        <!-- <div class="leading-loose"> -->
+        <form class="bg-white">
+          <div class="mb-4">
+
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="username" type="email" placeholder="Email">
+          </div>
+          <div class="mb-6">
+
+            <input
+              class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="password" type="password" placeholder="Password">
+            <a class="inline-block float-right align-baseline text-sm text-blue-500 hover:text-blue-800" href="#">
+              Forgot Password?
+            </a>
+            <!-- <p class="text-red-500 text-xs italic">Please choose a password.</p> -->
+          </div>
+          <div class="flex items-center justify-between d-block">
+            <button
+              class="loginButton d-block w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="button">
+              Login
+            </button>
+          </div>
+          <div class="text-xs mt-4">New to IEC61499?<a class="modal-open-sign
              loginBtn">&nbsp;&nbsp;Signup</a></div>
-          </form>
-          <!-- </div> -->
+        </form>
+        <!-- </div> -->
 
-          <!--Footer-->
-          <!-- <div class="flex justify-end pt-2">
+        <!--Footer-->
+        <!-- <div class="flex justify-end pt-2">
 			  <button class="px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2">Action</button>
 			  <button class="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Close</button>
 			</div> -->
 
-        </div>
       </div>
     </div>
+  </div>
 
-    <!---sign up modal-->
-    <div
-      class="modal-sign opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
-      <div class="modal-overlay-sign absolute w-full h-full bg-gray-900 opacity-50"></div>
+  <!---sign up modal-->
+  <div
+    class="modal-sign opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+    <div class="modal-overlay-sign absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+    <div class="modal-container bg-white w-11/12 md:max-w-xs mx-auto rounded shadow-lg z-50 overflow-y-auto border-t-2">
 
       <div
-        class="modal-container bg-white w-11/12 md:max-w-xs mx-auto rounded shadow-lg z-50 overflow-y-auto border-t-2">
+        class="modal-close-sign absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+        <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+          viewBox="0 0 18 18">
+          <path
+            d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+          </path>
+        </svg>
+        <span class="text-sm">(Esc)</span>
+      </div>
 
-        <div
-          class="modal-close-sign absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
-          <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-            viewBox="0 0 18 18">
-            <path
-              d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
-            </path>
-          </svg>
-          <span class="text-sm">(Esc)</span>
+      <!-- Add margin if you want to see some of the overlay behind the modal-->
+      <div class="modal-content py-4 text-left px-6">
+        <!--Title-->
+        <div class="flex justify-between items-center pb-3">
+          <p class="text-2xl text-gray-700">Signup</p>
+          <div class="modal-close-sign cursor-pointer z-50">
+            <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+              viewBox="0 0 18 18">
+              <path
+                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+              </path>
+            </svg>
+          </div>
         </div>
 
-        <!-- Add margin if you want to see some of the overlay behind the modal-->
-        <div class="modal-content py-4 text-left px-6">
-          <!--Title-->
-          <div class="flex justify-between items-center pb-3">
-            <p class="text-2xl text-gray-700">Signup</p>
-            <div class="modal-close-sign cursor-pointer z-50">
-              <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                viewBox="0 0 18 18">
-                <path
-                  d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
-                </path>
-              </svg>
-            </div>
+        <!--Body-->
+        <!-- <div class="leading-loose"> -->
+        <form class="bg-white">
+          <div class="mb-4">
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="username" type="text" placeholder="Full Name">
           </div>
+          <div class="mb-4">
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="email" type="email" placeholder="Email">
+          </div>
+          <div class="mb-6">
+            <input
+              class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="password" type="password" placeholder="Password">
+          </div>
+          <div class="mb-6">
+            <input
+              class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="password" type="password" placeholder="Confirm Password">
+          </div>
+          <div class="flex items-center justify-between d-block">
+            <button
+              class="loginButton d-block w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="button">
+              Signup
+            </button>
+          </div>
+          <div class="text-xs mt-4">Already have an account? <a class="modal-open loginBtn">Login</a></div>
+        </form>
+        <!-- </div> -->
 
-          <!--Body-->
-          <!-- <div class="leading-loose"> -->
-          <form class="bg-white">
-            <div class="mb-4">
-              <input
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="username" type="text" placeholder="Full Name">
-            </div>
-            <div class="mb-4">
-              <input
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="email" type="email" placeholder="Email">
-            </div>
-            <div class="mb-6">
-              <input
-                class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                id="password" type="password" placeholder="Password">
-            </div>
-            <div class="mb-6">
-              <input
-                class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                id="password" type="password" placeholder="Confirm Password">
-            </div>
-            <div class="flex items-center justify-between d-block">
-              <button
-                class="loginButton d-block w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="button">
-                Signup
-              </button>
-            </div>
-            <div class="text-xs mt-4">Already have an account? <a class="modal-open loginBtn">Login</a></div>
-          </form>
-          <!-- </div> -->
-
-          <!--Footer-->
-          <!-- <div class="flex justify-end pt-2">
+        <!--Footer-->
+        <!-- <div class="flex justify-end pt-2">
 			  <button class="px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2">Action</button>
 			  <button class="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Close</button>
 			</div> -->
 
-        </div>
       </div>
     </div>
+  </div>
 
-    <!-- AlpineJS -->
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <!-- Font Awesome -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-      integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
-
-
-    <script>
+  <!-- AlpineJS -->
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+  <!-- Font Awesome -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+    integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
 
 
-      //for modal
-      var openmodal = document.querySelectorAll('.modal-open')
-      for (var i = 0; i < openmodal.length; i++) {
-        openmodal[i].addEventListener('click', function (event) {
-          event.preventDefault()
-          toggleModal()
-        })
+  <script>
+
+
+    //for modal
+    var openmodal = document.querySelectorAll('.modal-open')
+    for (var i = 0; i < openmodal.length; i++) {
+      openmodal[i].addEventListener('click', function (event) {
+        event.preventDefault()
+        toggleModal()
+      })
+    }
+
+    var openmodalSign = document.querySelectorAll('.modal-open-sign')
+    for (var i = 0; i < openmodalSign.length; i++) {
+      openmodalSign[i].addEventListener('click', function (event) {
+        event.preventDefault()
+        toggleModalSignUp()
+      })
+    }
+
+    const overlay = document.querySelector('.modal-overlay')
+    overlay.addEventListener('click', toggleModal)
+
+    const overlay_sign = document.querySelector('.modal-overlay-sign')
+    overlay_sign.addEventListener('click', toggleModalSignUp)
+
+    var closemodal = document.querySelectorAll('.modal-close')
+    for (var i = 0; i < closemodal.length; i++) {
+      closemodal[i].addEventListener('click', toggleModal)
+    }
+
+    var closemodal_sign = document.querySelectorAll('.modal-close-sign')
+    for (var i = 0; i < closemodal_sign.length; i++) {
+      closemodal_sign[i].addEventListener('click', toggleModalSignUp)
+    }
+
+    document.onkeydown = function (evt) {
+      evt = evt || window.event
+      var isEscape = false
+      if ("key" in evt) {
+        isEscape = (evt.key === "Escape" || evt.key === "Esc")
+      } else {
+        isEscape = (evt.keyCode === 27)
       }
-
-      var openmodalSign = document.querySelectorAll('.modal-open-sign')
-      for (var i = 0; i < openmodalSign.length; i++) {
-        openmodalSign[i].addEventListener('click', function (event) {
-          event.preventDefault()
-          toggleModalSignUp()
-        })
+      if (isEscape && document.body.classList.contains('modal-active')) {
+        toggleModal()
       }
+    };
 
-      const overlay = document.querySelector('.modal-overlay')
-      overlay.addEventListener('click', toggleModal)
-
-      const overlay_sign = document.querySelector('.modal-overlay-sign')
-      overlay_sign.addEventListener('click', toggleModalSignUp)
-
-      var closemodal = document.querySelectorAll('.modal-close')
-      for (var i = 0; i < closemodal.length; i++) {
-        closemodal[i].addEventListener('click', toggleModal)
+    document.onkeydown = function (evt) {
+      evt = evt || window.event
+      var isEscape = false
+      if ("key" in evt) {
+        isEscape = (evt.key === "Escape" || evt.key === "Esc")
+      } else {
+        isEscape = (evt.keyCode === 27)
       }
-
-      var closemodal_sign = document.querySelectorAll('.modal-close-sign')
-      for (var i = 0; i < closemodal_sign.length; i++) {
-        closemodal_sign[i].addEventListener('click', toggleModalSignUp)
+      if (isEscape && document.body.classList.contains('modal-active-sign')) {
+        toggleModalSignUp()
       }
-
-      document.onkeydown = function (evt) {
-        evt = evt || window.event
-        var isEscape = false
-        if ("key" in evt) {
-          isEscape = (evt.key === "Escape" || evt.key === "Esc")
-        } else {
-          isEscape = (evt.keyCode === 27)
-        }
-        if (isEscape && document.body.classList.contains('modal-active')) {
-          toggleModal()
-        }
-      };
-
-      document.onkeydown = function (evt) {
-        evt = evt || window.event
-        var isEscape = false
-        if ("key" in evt) {
-          isEscape = (evt.key === "Escape" || evt.key === "Esc")
-        } else {
-          isEscape = (evt.keyCode === 27)
-        }
-        if (isEscape && document.body.classList.contains('modal-active-sign')) {
-          toggleModalSignUp()
-        }
-      };
+    };
 
 
-      function toggleModal() {
-        const body = document.querySelector('body')
-        const modal = document.querySelector('.modal')
-        modal.classList.toggle('opacity-0')
-        modal.classList.toggle('pointer-events-none')
-        body.classList.toggle('modal-active')
-      }
+    function toggleModal() {
+      const body = document.querySelector('body')
+      const modal = document.querySelector('.modal')
+      modal.classList.toggle('opacity-0')
+      modal.classList.toggle('pointer-events-none')
+      body.classList.toggle('modal-active')
+    }
 
-      function toggleModalSignUp() {
-        const body = document.querySelector('body')
-        const modal = document.querySelector('.modal-sign')
-        modal.classList.toggle('opacity-0')
-        modal.classList.toggle('pointer-events-none')
-        body.classList.toggle('modal-active-sign')
-      }
+    function toggleModalSignUp() {
+      const body = document.querySelector('body')
+      const modal = document.querySelector('.modal-sign')
+      modal.classList.toggle('opacity-0')
+      modal.classList.toggle('pointer-events-none')
+      body.classList.toggle('modal-active-sign')
+    }
 
-    </script>
+  </script>
 </body>
 
 </html>

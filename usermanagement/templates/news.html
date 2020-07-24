@@ -154,36 +154,36 @@
 
     <aside class="relative bg-sidebar h-screen w-1/4 hidden sm:block shadow-xl">
         <div class="p-6">
-            <a href="http://127.0.0.1:8000/" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">IEC 61499</a>
+            <a href="{{ BASE_URL }}/" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">IEC 61499</a>
             <div class="text-white text-xs">The new standard in automation</div class="">
 
         </div>
         <nav class="text-white text-base font-semibold pt-3">
-            <a href="http://127.0.0.1:8000/" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+            <a href="{{BASE_URL}}/" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
                 <i class="fas fa-home mr-3"></i>
                 HOME
             </a>
-            <a href="http://127.0.0.1:8000/news/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+            <a href="{{ BASE_URL }}/news/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fas fa-newspaper mr-3"></i>
                 NEWS
             </a>
-            <a href="http://127.0.0.1:8000/projects/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+            <a href="{{ BASE_URL }}/projects/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fas fa-tasks mr-3"></i>
                 PROJECTS
             </a>
-            <a href="http://127.0.0.1:8000/publications/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+            <a href="{{ BASE_URL }}/publications/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fas fa-volume-up mr-3"></i>
                 PUBLICATIONS
             </a>
-            <a href="http://127.0.0.1:8000/tools/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+            <a href="{{ BASE_URL }}/tools/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fas fa-cog mr-3"></i>
                 TOOLS
             </a>
-            <a href="http://127.0.0.1:8000/resources/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+            <a href="{{ BASE_URL }}/resources/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fas fa-link mr-3"></i>
                 RESOURCES
             </a>
-            <a href="http://127.0.0.1:8000/imprint/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+            <a href="{{ BASE_URL }}/imprint/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fas fa-copyright mr-3"></i>
                 IMPRINT
             </a>
@@ -196,17 +196,27 @@
         <header class="w-full flex items-center py-4 px-6 hidden sm:flex header">
             <div class="w-1/2 text-gray-700">News
             </div>
+            {% if user.is_authenticated %}
+<!--                  <form method="get" action="{{BASE_URL}}/logout/">-->
+                {% csrf_token %}
+                    <div class="w-1/2 flex justify-end">
+                    Hello {{user.name}}
+                    <button class="mr-6" type="submit">Logout</button>
+        <!--        <button class="modal-open-sign">Signup</button>-->
+            </div>
+<!--                  </form>-->
+            {% else %}
             <div class="w-1/2 flex justify-end">
                 <button class="mr-6 modal-open">Login</button>
                 <button class="modal-open-sign">Signup</button>
             </div>
-
+            {% endif %}
         </header>
 
         <!-- Mobile Header & Nav -->
         <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 sm:hidden">
             <div class="flex items-center justify-between">
-                <a href="http://127.0.0.1:8000/" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
+                <a href="{{BASE_URL}}/" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
                 <button @click="isOpen = !isOpen" class="text-white text-3xl focus:outline-none">
                     <i x-show="!isOpen" class="fas fa-bars"></i>
                     <i x-show="isOpen" class="fas fa-times"></i>
@@ -215,33 +225,33 @@
 
             <!-- Dropdown Nav -->
             <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
-                <a href="http://127.0.0.1:8000/" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+                <a href="{{ BASE_URL }}" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
                     <i class="fas fa-home mr-3"></i>
                     HOME
                 </a>
-                <a href="http://127.0.0.1:8000/news/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <a href="{{ BASE_URL }}/news/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                     <i class="fas fa-newspaper mr-3"></i>
                     NEWS
                 </a>
-                <a href="http://127.0.0.1:8000/projects/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <a href="{{ BASE_URL }}/projects/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                     <i class="fas fa-tasks mr-3"></i>
                     PROJECTS
                 </a>
-                <a href="http://127.0.0.1:8000/publications/"
+                <a href="{{ BASE_URL }}/publications/"
                     class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                     <i class="fas fa-volume-up mr-3"></i>
                     PUBLICATIONS
                 </a>
-                <a href="http://127.0.0.1:8000/tools/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <a href="{{ BASE_URL }}/tools/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                     <i class="fas fa-cog mr-3"></i>
                     TOOLS
                 </a>
-                <a href="http://127.0.0.1:8000/resources/"
+                <a href="{{ BASE_URL }}/resources/"
                     class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                     <i class="fas fa-link mr-3"></i>
                     RESOURCES
                 </a>
-                <a href="http://127.0.0.1:8000/imprint/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <a href="{{ BASE_URL }}/imprint/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                     <i class="fas fa-copyright mr-3"></i>
                     IMPRINT
                 </a>
@@ -276,20 +286,22 @@
                 </div>
             </div>
 
-
+            {%for i in news%}
             <div class="mx-6 mt-6">
                 <div class="flex flex-wrap">
                     <div class="w-3/4 h-40">
-                        <img src="./../media/bg-signup.png">
+                        <img src="{{i.image.url}}" alt="">
                     </div>
                     <div class="w-56 ml-4">
                         <div class="bg-white">
                             <div class="flex flex-wrap">
                                 <div class="w-full p-3">
-                                    <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2">2020</p>
+                                    <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2">{{i.title}}</p>
                                     <p class="text-sm flex items-center text-blue-500 font-semibold mt-3">
-                                        OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
-                                        architecture
+                                        <a href="{{i.link}}" style="color:blue">{{i.link}}</a>
+                                    </p>
+                                    <p class="text-sm flex items-center text-blue-500 font-semibold mt-3">
+                                        {{i.description}}
                                     </p>
                                 </div>
                             </div>
@@ -323,7 +335,7 @@
                 </div>
             </div>
 
-
+            {% endfor %}
 
 
 
@@ -531,18 +543,18 @@
 
                     <!--Body-->
                     <!-- <div class="leading-loose"> -->
-                    <form class="bg-white">
+                    <form class="bg-white" method="post" action="{{BASE_URL}}/login/">
                         <div class="mb-4">
-
+                            {% csrf_token %}
                             <input
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="username" type="email" placeholder="Email">
+                                name="email" id="username" type="email" placeholder="Email">
                         </div>
                         <div class="mb-6">
 
                             <input
                                 class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                                id="password" type="password" placeholder="Password">
+                                name="password" id="password" type="password" placeholder="Password">
                             <a class="inline-block float-right align-baseline text-sm text-blue-500 hover:text-blue-800"
                                 href="#">
                                 Forgot Password?
@@ -552,7 +564,7 @@
                         <div class="flex items-center justify-between d-block">
                             <button
                                 class="loginButton d-block w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                type="button">
+                                type="submit">
                                 Login
                             </button>
                         </div>
@@ -607,31 +619,32 @@
 
                     <!--Body-->
                     <!-- <div class="leading-loose"> -->
-                    <form class="bg-white">
+                    <form class="bg-white" method="post" action="{{BASE_URL}}/register/">
                         <div class="mb-4">
+                            {%csrf_token%}
                             <input
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="username" type="text" placeholder="Full Name">
+                                name="name" id="username" type="text" placeholder="Full Name">
                         </div>
                         <div class="mb-4">
                             <input
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="email" type="email" placeholder="Email">
+                                name="email" id="email" type="email" placeholder="Email">
                         </div>
                         <div class="mb-6">
                             <input
                                 class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                                id="password" type="password" placeholder="Password">
+                                name="password1" id="password" type="password" placeholder="Password">
                         </div>
                         <div class="mb-6">
                             <input
                                 class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                                id="password" type="password" placeholder="Confirm Password">
+                                name="password2" id="password" type="password" placeholder="Confirm Password">
                         </div>
                         <div class="flex items-center justify-between d-block">
                             <button
                                 class="loginButton d-block w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                type="button">
+                                type="submit">
                                 Signup
                             </button>
                         </div>
