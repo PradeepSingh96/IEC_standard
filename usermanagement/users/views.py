@@ -209,9 +209,9 @@ def add_project(request):
 
         project = Projects(title=title, link=link, description=description, category=category, image=uploaded_file_url)
         project.save()
-        return redirect('add_project')
+        return redirect('/')
     else:
-        return render(request, 'add_project.html')
+        return render(request, '/')
 
 
 # Logout

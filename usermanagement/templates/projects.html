@@ -594,22 +594,33 @@
           </div>
 
           <div class="w-full max-w-md">
-            <form class="bg-white">
+            <form class="bg-white" method="post" action="http://127.0.0.1:8000/add_project/" enctype="multipart/form-data">
+              {% csrf_token %}
               <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                   Title
                 </label>
                 <input
                   class="border border-gray-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="title" type="text" placeholder="Title Name">
+                  name="title" id="title" type="text" placeholder="Title Name">
               </div>
+
+              <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                  Link
+                </label>
+                <input
+                  class="border border-gray-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  name="link" id="link" type="text" placeholder="Link">
+              </div>
+
               <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                   Description
                 </label>
                 <textarea
                   class="resize border border-gray-400 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                  id="description" type="text" placeholder="Description">
+                  name="description" id="description" type="text" placeholder="Description">
                </textarea>
               </div>
 
@@ -625,10 +636,12 @@
 
 
                   <div class="text-black font-black text-sm p-3">
-                    <button class="loginButton text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                      type="button">
-                      Browse
-                    </button>
+                    <input class="loginButton text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                            type="file" name="myfile">
+<!--                    <button class="loginButton text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"-->
+<!--                      type="button">-->
+<!--                      Browse-->
+<!--                    </button>-->
                   </div>
                 </div>
                 <!-- </div> -->
@@ -643,7 +656,7 @@
                 <div class="relative mb-4">
                   <select
                     class="bg-white block appearance-none w-48 border border-gray-400 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                    id="grid-state">
+                    name="category" id="grid-state">
                     <option value="Student_projects">Student projects</option>
                     <option value="Test_beds">Testbeds</option>
                   </select>
@@ -653,12 +666,12 @@
                 <div class="flex items-center justify-center">
                   <button
                     class=" border border-red-500 text-black py-1 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
-                    type="button">
+                    type="submit">
                     Save
                   </button>
 
                   <button class="loginButton  text-white py-1 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="button">
+                    type="submit">
                     Cancel
                   </button>
 
