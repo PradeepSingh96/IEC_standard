@@ -29,7 +29,7 @@ def index(request):
         user = auth.authenticate(email=email, password=password)
         if user is not None:
             auth.login(request, user)
-            update_last_login(None, user)
+            # update_last_login(None, user)
             return redirect('/')
         else:
             messages.info(request, 'invalid credentials')
