@@ -6,20 +6,19 @@ from django.contrib.auth.models import update_last_login, auth
 from django.core.mail import send_mail
 from itsdangerous import URLSafeTimedSerializer
 from datetime import timedelta
-from django.conf.global_settings import SECRET_KEY
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 
 User = get_user_model()
+SECRET_KEY = settings.SECRET_KEY
+EMAIL_HOST_USER = settings.EMAIL_HOST_USER
 
 
 def index(request):
-
     if request.method == 'POST':
-        import pdb;
-        pdb.set_trace()
         email = request.POST['email']
         password = request.POST['password']
         user_email = User.objects.filter(email=email)
@@ -67,7 +66,7 @@ def register(request):
 # user login
 def login(request):
     if request.method == 'POST':
-        # import pdb;pdb.set_trace()
+
         email = request.POST['email']
         password = request.POST['password']
         user_email = User.objects.filter(email=email)
@@ -102,13 +101,13 @@ def send_email(request):
         subject = 'Reset Password'
         message = ("Hello " + user.name + ",\n\nPlease click on the following link to reset your password:\n")
 
-        send_mail(subject, message + link, user_email.get().email, [email],
+        send_mail(subject, message + link, user_email.get().email, [EMAIL_HOST_USER],
                   fail_silently=False,
                   )
         # messages.info(request, 'email sent successfully')
         return redirect('/')
     else:
-        return render(request, 'send_email.html')
+        return render(request, '/')
 
 
 # update password
@@ -126,7 +125,7 @@ def change_password(request, **kwargs):
                 user = User.objects.filter(email=email).get()
                 user.set_password(password1)
                 user.save()
-                return redirect('login')
+                return redirect('/')
             else:
                 print('password not matching....')
                 messages.info(request, 'password not matched')
@@ -134,7 +133,7 @@ def change_password(request, **kwargs):
         else:
             print("email not found")
             messages.info(request, 'This link is expired, Please generate new Link')
-            return redirect('send_email')
+            return redirect('/')
     else:
         return render(request, 'pass.html')
 
