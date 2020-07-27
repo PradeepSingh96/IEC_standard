@@ -107,7 +107,7 @@ def send_email(request):
         # messages.info(request, 'email sent successfully')
         return redirect('/')
     else:
-        return render(request, 'send_email.html')
+        return render(request, '/')
 
 
 # update password
@@ -125,7 +125,7 @@ def change_password(request, **kwargs):
                 user = User.objects.filter(email=email).get()
                 user.set_password(password1)
                 user.save()
-                return redirect('login')
+                return redirect('/')
             else:
                 print('password not matching....')
                 messages.info(request, 'password not matched')
@@ -133,7 +133,7 @@ def change_password(request, **kwargs):
         else:
             print("email not found")
             messages.info(request, 'This link is expired, Please generate new Link')
-            return redirect('send_email')
+            return redirect('/')
     else:
         return render(request, 'pass.html')
 
