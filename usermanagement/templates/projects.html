@@ -1,36 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects</title>
-</head>
-
-<body>
-    <h1> Hi here you see the Projects</h1>
-    {% for project in projects %}
-    <div>
-        <img src="{{project.image.url}}" alt="">
-        {{project.title}}
-        (<a href="{{project.link}}">{{project.link}}</a>)
-        {{project.description}}
-        {{project.approved}}
-    </div>
-    {% endfor %}
-</body>
-
-</html> -->
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -136,7 +103,7 @@
   </style>
 </head>
 
-<body class="bg-gray-100 font-family-karla flex">
+<body onload="hightlightActiveRoute()" class="bg-gray-100 font-family-karla flex">
 
   <aside class="relative bg-sidebar h-screen w-1/4 hidden sm:block shadow-xl">
     <div class="p-6">
@@ -145,36 +112,37 @@
 
     </div>
     <nav class="text-white text-base font-semibold pt-3">
-      <a href="{{BASE_URL}}/" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+      <a href="{{BASE_URL}}/" class="pageRoutes flex items-center  text-white py-4 pl-6 nav-item">
         <i class="fas fa-home mr-3"></i>
         HOME
       </a>
-      <a href="{{BASE_URL}}/news/" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+      <a href="{{BASE_URL}}/news/"
+        class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
         <i class="fas fa-newspaper mr-3"></i>
         NEWS
       </a>
       <a href="{{BASE_URL}}/projects/"
-        class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+        class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
         <i class="fas fa-tasks mr-3"></i>
         PROJECTS
       </a>
       <a href="{{BASE_URL}}/publications/"
-        class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+        class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
         <i class="fas fa-volume-up mr-3"></i>
         PUBLICATIONS
       </a>
       <a href="{{BASE_URL}}/tools/"
-        class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+        class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
         <i class="fas fa-cog mr-3"></i>
         TOOLS
       </a>
       <a href="{{BASE_URL}}/resources/"
-        class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+        class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
         <i class="fas fa-link mr-3"></i>
         RESOURCES
       </a>
       <a href="{{BASE_URL}}/imprint/"
-        class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+        class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
         <i class="fas fa-copyright mr-3"></i>
         IMPRINT
       </a>
@@ -204,10 +172,22 @@
           Add New Project
         </button>
       </div>
+      {% if user.is_authenticated %}
+      <form method="post" action="{{BASE_URL}}/logout/">
+        {% csrf_token %}
+        <div class="w-1/2 flex justify-end">
+          Hello {{user.name}}
+          <button class="mr-6" type="submit">Logout</button>
+
+          <button class="modal-open-sign">Signup</button>
+        </div>
+      </form>
+      {% else %}
       <div class="w-1/2 flex justify-end">
         <button class="mr-6 modal-open">Login</button>
         <button class="modal-open-sign">Signup</button>
       </div>
+      {% endif %}
 
     </header>
 
@@ -223,37 +203,37 @@
 
       <!-- Dropdown Nav -->
       <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
-        <a href="{{BASE_URL}}/" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+        <a href="{{BASE_URL}}/" class="flex items-center pageRoutes text-white py-4 pl-6 nav-item">
           <i class="fas fa-home mr-3"></i>
           HOME
         </a>
         <a href="{{BASE_URL}}/news/"
-          class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+          class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
           <i class="fas fa-newspaper mr-3"></i>
           NEWS
         </a>
         <a href="{{BASE_URL}}/projects/"
-          class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+          class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
           <i class="fas fa-tasks mr-3"></i>
           PROJECTS
         </a>
         <a href="{{BASE_URL}}/publications/"
-          class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+          class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
           <i class="fas fa-volume-up mr-3"></i>
           PUBLICATIONS
         </a>
         <a href="{{BASE_URL}}/tools/"
-          class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+          class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
           <i class="fas fa-cog mr-3"></i>
           TOOLS
         </a>
         <a href="{{BASE_URL}}/resources/"
-          class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+          class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
           <i class="fas fa-link mr-3"></i>
           RESOURCES
         </a>
         <a href="{{BASE_URL}}/imprint/"
-          class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+          class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
           <i class="fas fa-copyright mr-3"></i>
           IMPRINT
         </a>
@@ -286,7 +266,8 @@
                 <div class="flex flex-wrap">
                   <div class="w-full p-3">
                     <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2 underline">2019-2022</p>
-                    <p><a class="text-blue-500 text-sm ml-3">1-&nbsp;SWARM</a></p>
+                    <p><a href="https://cordis.europa.eu/project/id/871743"
+                        class="text-blue-500 text-sm ml-3">1-&nbsp;SWARM</a></p>
                     <p class="text-sm flex items-center text-gray-700 ml-3 mt-2">
                       OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
                       architecture
@@ -307,7 +288,8 @@
                 <div class="flex flex-wrap">
                   <div class="w-full p-3">
                     <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2 underline">2019-2022</p>
-                    <p><a class="text-blue-500 text-sm ml-3">1.&nbsp;QW4LITY</a></p>
+                    <p><a href="https://cordis.europa.eu/project/id/825030"
+                        class="text-blue-500 text-sm ml-3">1.&nbsp;QW4LITY</a></p>
                     <p class="text-sm flex items-center text-gray-700 ml-3 mt-2">
                       OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
                       architecture
@@ -333,7 +315,8 @@
                 <div class="flex flex-wrap">
                   <div class="w-full p-3">
                     <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2 underline">2016-2019</p>
-                    <p><a class="text-blue-500 text-sm ml-3">1.&nbsp;DAEDALUS</a></p>
+                    <p><a href="https://cordis.europa.eu/project/id/723248"
+                        class="text-blue-500 text-sm ml-3">1.&nbsp;DAEDALUS</a></p>
                     <p class="text-sm flex items-center text-gray-700 ml-3 mt-2">
                       OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
                       architecture
@@ -354,7 +337,8 @@
                 <div class="flex flex-wrap">
                   <div class="w-full p-3">
                     <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2 underline">2016-2019</p>
-                    <p><a class="text-blue-500 text-sm ml-3">1.&nbsp;ForZDM</a></p>
+                    <p><a href="https://cordis.europa.eu/project/id/723698"
+                        class="text-blue-500 text-sm ml-3">1.&nbsp;ForZDM</a></p>
                     <p class="text-sm flex items-center text-gray-700 ml-3 mt-2">
                       OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
                       architecture
@@ -379,7 +363,8 @@
                 <div class="flex flex-wrap">
                   <div class="w-full p-3">
                     <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2 underline">2016-2019</p>
-                    <p><a class="text-blue-500 text-sm ml-3">1.&nbsp;SYMBIOPTIMA</a></p>
+                    <p><a href="https://cordis.europa.eu/project/id/680426"
+                        class="text-blue-500 text-sm ml-3">1.&nbsp;SYMBIOPTIMA</a></p>
                     <p class="text-sm flex items-center text-gray-700 ml-3 mt-2">
                       OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
                       architecture
@@ -821,7 +806,8 @@
                 Signup
               </button>
             </div>
-            <div class="text-xs mt-4">Already have an account? <a class="modal-open loginBtn">Login</a></div>
+            <div class="text-xs mt-4">Already have an account? <a class="modal-open loginBtn"
+                onclick="openLoginModal()">Login</a></div>
           </form>
           <!-- </div> -->
 
@@ -843,19 +829,19 @@
 
 
     <script>
-      // Get the container element
-      var btnContainer = document.getElementsByClassName("navbar");
 
-      // Get all buttons with class="btn" inside the container
-      var btns = btnContainer.getElementsByClassName("nav-item");
+      function openLoginModal() {
+        toggleModalSignUp()
+        toggleModal()
+      }
 
-      // Loop through the buttons and add the active class to the current/clicked button
-      for (var i = 0; i < btns.length; i++) {
-        btns[i].addEventListener("click", function () {
-          var current = document.getElementsByClassName("active-nav-link");
-          current[0].className = current[0].className.replace(" active-nav-link", "");
-          this.className += " active-nav-link";
-        });
+      function hightlightActiveRoute() {
+        const pageRoutes = document.getElementsByClassName("pageRoutes");
+        let routesArray = { "/": 0, "/news/": 1, "/projects/": 2, "/publications/": 3, "/tools/": 4, "/resources/": 5, "/imprint/": 6 };
+        if (pageRoutes.length > 0) {
+          let activeRoute = pageRoutes[routesArray[window.location.pathname]];
+          activeRoute.className += " active-nav-link";
+        }
       }
 
       //for modal

@@ -1,37 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-<title>Hello</title>
-</head>
-<body>
-
-<div class="super_container">
-		{% csrf_token %}
-	<header class="header">
-		<nav class="main_nav">
-			<ul class="d-flex flex-row align-items-start justify-content-start">
-			<li class="active"><a href="index.html">Home</a></li>
-			<li><a href="contact.html">Contact</a></li>
-
-			{% if user.is_authenticated %}
-				<li>Hello,{{user.name}}</li>
-				<li><a href="logout">Logout</a></li>
-			{% else %}
-			<li><a href="register">Signup</a></li>
-			<li><a href="login">Login</a></li>
-			{% endif %}
-
-			<li><a href="news">News</a></li>
-			<li><a href="projects">Projects</a></li>
-			<li><a href="tools">Tools</a></li>
-			</ul>
-		</nav>
-		
-</div>
-
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,21 +53,15 @@
       background: #3d68ff;
     }
 
-
-    .modal {
+    .modal,
+    .modal-sign,
+    .modal-forget {
       transition: opacity 0.25s ease;
     }
 
-    .modal-sign {
-      transition: opacity 0.25s ease;
-    }
-
-    body.modal-active {
-      overflow-x: hidden;
-      overflow-y: visible !important;
-    }
-
-    body.modal-active-sign {
+    body.modal-active,
+    body.modal-active-sign,
+    body.modal-active-forget {
       overflow-x: hidden;
       overflow-y: visible !important;
     }
@@ -127,7 +87,7 @@
   </style>
 </head>
 
-<body class="bg-gray-100 font-family-karla flex">
+<body onload="hightlightActiveRoute()" class="bg-gray-100 font-family-karla flex">
 
   <aside class="relative bg-sidebar h-screen w-1/4 hidden sm:block shadow-xl">
     <div class="p-6">
@@ -138,37 +98,37 @@
 
 
     <nav class="text-white text-base font-semibold pt-3 navbar">
-      <a href="{{ BASE_URL }}/" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+      <a href="{{ BASE_URL }}/" class="pageRoutes flex items-center text-white py-4 pl-6 nav-item">
         <i class="fas fa-home mr-3"></i>
         HOME
       </a>
       <a href="{{ BASE_URL }}/news/"
-        class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+        class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
         <i class="fas fa-newspaper mr-3"></i>
         NEWS
       </a>
       <a href="{{ BASE_URL }}/projects/"
-        class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+        class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
         <i class="fas fa-tasks mr-3"></i>
         PROJECTS
       </a>
       <a href="{{ BASE_URL }}/publications/"
-        class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+        class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
         <i class="fas fa-volume-up mr-3"></i>
         PUBLICATIONS
       </a>
       <a href="{{ BASE_URL }}/tools/"
-        class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+        class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
         <i class="fas fa-cog mr-3"></i>
         TOOLS
       </a>
       <a href="{{ BASE_URL }}/resources/"
-        class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+        class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
         <i class="fas fa-link mr-3"></i>
         RESOURCES
       </a>
       <a href="{{ BASE_URL }}/imprint/"
-        class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+        class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
         <i class="fas fa-copyright mr-3"></i>
         IMPRINT
       </a>
@@ -183,15 +143,15 @@
       </div>
 
       {% if user.is_authenticated %}
-      <!--      <form method="post" action="{{BASE_URL}}/logout/">-->
-      {% csrf_token %}
-      <div class="w-1/2 flex justify-end">
-        Hello {{user.name}}
-        <button class="mr-6" type="submit">Logout</button>
+      <form method="post" action="{{BASE_URL}}/logout/">
+        {% csrf_token %}
+        <div class="w-1/2 flex justify-end">
+          Hello {{user.name}}
+          <button class="mr-6" type="submit">Logout</button>
 
-        <!--        <button class="modal-open-sign">Signup</button>-->
-      </div>
-      <!--      </form>-->
+          <button class="modal-open-sign">Signup</button>
+        </div>
+      </form>
       {% else %}
       <div class="w-1/2 flex justify-end">
         <button class="mr-6 modal-open">Login</button>
@@ -213,37 +173,37 @@
 
       <!-- Dropdown Nav -->
       <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
-        <a href="http://127.0.0.1:8000/" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
+        <a href="http://127.0.0.1:8000/" class="flex items-center pageRoutes text-white py-4 pl-6 nav-item">
           <i class="fas fa-home mr-3"></i>
           HOME
         </a>
         <a href="{{BASE_URL}}/news/"
-          class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+          class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
           <i class="fas fa-newspaper mr-3"></i>
           NEWS
         </a>
         <a href="{{BASE_URL}}/projects/"
-          class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+          class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
           <i class="fas fa-tasks mr-3"></i>
           PROJECTS
         </a>
         <a href="{{BASE_URL}}/publications/"
-          class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+          class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
           <i class="fas fa-volume-up mr-3"></i>
           PUBLICATIONS
         </a>
         <a href="{{BASE_URL}}/tools/"
-          class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+          class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
           <i class="fas fa-cog mr-3"></i>
           TOOLS
         </a>
         <a href="{{BASE_URL}}/resources/"
-          class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+          class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
           <i class="fas fa-link mr-3"></i>
           RESOURCES
         </a>
         <a href="{{BASE_URL}}/imprint/"
-          class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+          class="pageRoutes flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
           <i class="fas fa-copyright mr-3"></i>
           IMPRINT
         </a>
@@ -268,8 +228,8 @@
           Lorem ipsum dolor sit
         </p>
         <div
-          class="w-32 bg-red-600 text-white py-2 px-4 focus:outline-none focus:shadow-outline mr-6 float-right flex justify-center">
-          <i class="fa fa-caret-square-right bg-white text-red-500 border-0 mt-1 mr-3"></i>
+          class="lg:w-32 bg-red-600 text-white py-2 px-4 focus:outline-none focus:shadow-outline lg:mr-6 lg:float-right sm:float-left flex justify-center">
+          <!-- <i class="fa fa-caret-square-right bg-white text-red-500 border-0 mt-1 mr-3"></i> -->
           purus
         </div>
 
@@ -316,56 +276,56 @@
         <p class="text-2xl text-gray-700 pb-3 flex items-center mt-6">
           IEC 61499 provides
         </p>
-
-        <div class="flex flex-wrap">
-          <div class="w-56 mr-6">
-            <div class="max-w-xs rounded overflow-hidden shadow-lg">
-              <div class="">
-                <img class="h-full w-full object-contain" src="./../media/bg-signup.png">
-              </div>
-              <div class="px-6 py-4 bg-white text-gray-700 h-32 text-sm">
-                Combination of distributed programming language and legacy PLC programming with IEC 61131-3
-              </div>
-            </div>
-          </div>
-
-
-          <div class="w-56 mr-6">
-            <div class="max-w-xs rounded overflow-hidden shadow-lg">
-              <div class="">
-                <img class="h-full w-full object-contain" src="./../media/bg-signup.png">
-              </div>
-              <div class="px-6 py-4 bg-white text-gray-700 h-32 text-sm">
-                Generic modeling approach for distributed control applications
+        <main class="w-full flex-gro">
+          <div class="flex flex-wrap">
+            <div class="lg:w-56 lg:mr-5 sm:w-auto mb-3">
+              <div class="sm:max-w-full lg:max-w-xs rounded overflow-hidden shadow-lg">
+                <div class="">
+                  <img class="h-full w-full object-contain" src="./../media/bg-signup.png">
+                </div>
+                <div class="px-6 py-4 bg-white text-gray-700 h-32 text-sm">
+                  Combination of distributed programming language and legacy PLC programming with IEC 61131-3
+                </div>
               </div>
             </div>
-          </div>
 
 
-          <div class="w-56 mr-5">
-            <div class="max-w-xs rounded overflow-hidden shadow-lg">
-              <div class="">
-                <img class="h-full w-full object-contain" src="./../media/bg-signup.png">
-              </div>
-              <div class="px-6 py-4 bg-white text-gray-700 h-32 text-sm">
-                Function Block concept
-              </div>
-            </div>
-          </div>
-
-          <div class="w-56">
-            <div class="max-w-xs rounded overflow-hidden shadow-lg">
-              <div class="">
-                <img class="h-full w-full object-contain" src="./../media/bg-signup.png">
-              </div>
-              <div class="px-6 py-4 bg-white text-gray-700 h-32 text-sm">
-                Separation of data and event flow
+            <div class="lg:w-56 lg:mr-5 sm:w-auto mb-3">
+              <div class="sm:max-w-full lg:max-w-xs rounded overflow-hidden shadow-lg">
+                <div class="">
+                  <img class="h-full w-full object-contain" src="./../media/bg-signup.png">
+                </div>
+                <div class="px-6 py-4 bg-white text-gray-700 h-32 text-sm">
+                  Generic modeling approach for distributed control applications
+                </div>
               </div>
             </div>
+
+
+            <div class="lg:w-56 lg:mr-5 sm:w-auto mb-3">
+              <div class="sm:max-w-full lg:max-w-xs rounded overflow-hidden shadow-lg">
+                <div class="">
+                  <img class="h-full w-full object-contain" src="./../media/bg-signup.png">
+                </div>
+                <div class="px-6 py-4 bg-white text-gray-700 h-32 text-sm">
+                  Function Block concept
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:w-56 lg:mr-5 sm:w-auto mb-3">
+              <div class="sm:max-w-full lg:max-w-xs rounded overflow-hidden shadow-lg">
+                <div class="">
+                  <img class="h-full w-full object-contain" src="./../media/bg-signup.png">
+                </div>
+                <div class="px-6 py-4 bg-white text-gray-700 h-32 text-sm">
+                  Separation of data and event flow
+                </div>
+              </div>
+            </div>
+
           </div>
-
-        </div>
-
+        </main>
         <div class="flex flex-wrap mt-6 text-gray-700">
           Keywords:&nbsp;&nbsp;industrial automation;distributed control;automation
           objects;function block
@@ -459,20 +419,20 @@
               <input
                 class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 name="password" id="password" type="password" placeholder="Password">
-              <a class="inline-block float-right align-baseline text-sm text-blue-500 hover:text-blue-800" href="#">
+              <a class="modal-forget inline-block float-right align-baseline text-sm text-blue-500 hover:text-blue-800"
+                href="#">
                 Forgot Password?
               </a>
               <!-- <p class="text-red-500 text-xs italic">Please choose a password.</p> -->
             </div>
             <div class="flex items-center justify-between d-block">
               <button
-                class="loginButton d-block w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                class="loginButton d-block w-full bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit">
                 Login
               </button>
             </div>
-            <div class="text-xs mt-4">New to IEC61499?<a class="modal-open-sign
-             loginBtn">&nbsp;&nbsp;Signup</a></div>
+            <div class="text-xs mt-4">New to IEC61499?<a class="loginBtn modal-open-sign">&nbsp;&nbsp;Signup</a></div>
           </form>
           <!-- </div> -->
 
@@ -546,12 +506,14 @@
             </div>
             <div class="flex items-center justify-between d-block">
               <button
-                class="loginButton d-block w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                class="loginButton d-block w-full bg-blue-500  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit">
                 Signup
               </button>
             </div>
-            <div class="text-xs mt-4">Already have an account? <a class="modal-open loginBtn">Login</a></div>
+            <div class="text-xs mt-4">Already have an account? <a class="loginBtn modal-open"
+                onclick="openLoginModal()">Login</a>
+            </div>
           </form>
           <!-- </div> -->
 
@@ -565,6 +527,74 @@
       </div>
     </div>
 
+    <!---forget up modal-->
+    <div
+      class="modal-forget opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+      <div class="modal-overlay-forget absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+      <div
+        class="modal-container bg-white w-11/12 md:max-w-xs mx-auto rounded shadow-lg z-50 overflow-y-auto border-t-2">
+
+        <div
+          class="modal-close-forget absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+          <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+            viewBox="0 0 18 18">
+            <path
+              d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+            </path>
+          </svg>
+          <span class="text-sm">(Esc)</span>
+        </div>
+
+        <div class="modal-content py-4 text-left px-6">
+          <div class="flex justify-between items-center pb-3">
+            <p class="text-2xl text-gray-700">Forgot Password</p>
+            <div class="modal-close-forget cursor-pointer z-50">
+              <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                viewBox="0 0 18 18">
+                <path
+                  d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+                </path>
+              </svg>
+            </div>
+          </div>
+
+          <form class="bg-white" method="post" action="{{BASE_URL}}/register/">
+            <div class="mb-4">
+              {%csrf_token%}
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                name="name" id="username" type="text" placeholder="Full Name">
+            </div>
+            <div class="mb-4">
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                name="email" id="email" type="email" placeholder="Email">
+            </div>
+            <div class="mb-6">
+              <input
+                class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                name="password1" id="password" type="password" placeholder="Password">
+            </div>
+            <div class="mb-6">
+              <input
+                class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                name="password2" id="password" type="password" placeholder="Confirm Password">
+            </div>
+            <div class="flex items-center justify-between d-block">
+              <button
+                class="loginButton d-block w-full bg-blue-500  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="submit">
+                Signup
+              </button>
+            </div>
+            <div class="text-xs mt-4">Already have an account? <a class="loginBtn modal-open">Login</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <!-- AlpineJS -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <!-- Font Awesome -->
@@ -573,20 +603,35 @@
 
 
     <script>
-      // Get the container element
-      var btnContainer = document.getElementsByClassName("navbar");
-
-      // Get all buttons with class="btn" inside the container
-      var btns = btnContainer.getElementsByClassName("nav-item");
-
-      // Loop through the buttons and add the active class to the current/clicked button
-      for (var i = 0; i < btns.length; i++) {
-        btns[i].addEventListener("click", function () {
-          var current = document.getElementsByClassName("active-nav-link");
-          current[0].className = current[0].className.replace(" active-nav-link", "");
-          this.className += " active-nav-link";
-        });
+      function openLoginModal() {
+        toggleModalSignUp()
+        toggleModal()
       }
+      function hightlightActiveRoute() {
+        const pageRoutes = document.getElementsByClassName("pageRoutes");
+        let routesArray = { "/": 0, "/news/": 1, "/projects/": 2, "/publications/": 3, "/tools/": 4, "/resources/": 5, "/imprint/": 6 };
+        if (pageRoutes.length > 0) {
+          let activeRoute = pageRoutes[routesArray[window.location.pathname]];
+          activeRoute.className += " active-nav-link";
+        }
+      }
+
+
+      // var location = window.location.url;
+      // console.log("location", location)
+      // var nav = document.querySelectorAll('.nav-item')
+      // for (var i = 0; i < nav.length; i++) {
+      //   nav.addEventListener('click', function (event) {
+      //     event.preventDefault()
+      //     console.log("clicked");
+      //     const modal = document.querySelector('.nav-item');
+      //     console.log("modal", modal)
+      //     modal.classList.remove('active-nav-link')
+      //     this.classList.add('active-nav-link')
+      //     // 
+      //   })
+      // }
+
 
 
       //for modal
@@ -606,11 +651,22 @@
         })
       }
 
+      var openmodalForget = document.querySelectorAll('.modal-open-forget')
+      for (var i = 0; i < openmodalForget.length; i++) {
+        openmodalForget[i].addEventListener('click', function (event) {
+          event.preventDefault()
+          toggleModalForget()
+        })
+      }
+
       const overlay = document.querySelector('.modal-overlay')
       overlay.addEventListener('click', toggleModal)
 
       const overlay_sign = document.querySelector('.modal-overlay-sign')
       overlay_sign.addEventListener('click', toggleModalSignUp)
+
+      const overlay_forget = document.querySelector('.modal-overlay-forget')
+      overlay_sign.addEventListener('click', toggleModalForget)
 
       var closemodal = document.querySelectorAll('.modal-close')
       for (var i = 0; i < closemodal.length; i++) {
@@ -620,6 +676,11 @@
       var closemodal_sign = document.querySelectorAll('.modal-close-sign')
       for (var i = 0; i < closemodal_sign.length; i++) {
         closemodal_sign[i].addEventListener('click', toggleModalSignUp)
+      }
+
+      var closemodal_forget = document.querySelectorAll('.modal-close-forget')
+      for (var i = 0; i < closemodal_sign.length; i++) {
+        closemodal_sign[i].addEventListener('click', toggleModalForget)
       }
 
       document.onkeydown = function (evt) {
@@ -648,6 +709,19 @@
         }
       };
 
+      document.onkeydown = function (evt) {
+        evt = evt || window.event
+        var isEscape = false
+        if ("key" in evt) {
+          isEscape = (evt.key === "Escape" || evt.key === "Esc")
+        } else {
+          isEscape = (evt.keyCode === 27)
+        }
+        if (isEscape && document.body.classList.contains('modal-active-sign')) {
+          toggleModalForget()
+        }
+      };
+
 
       function toggleModal() {
         const body = document.querySelector('body')
@@ -663,6 +737,14 @@
         modal.classList.toggle('opacity-0')
         modal.classList.toggle('pointer-events-none')
         body.classList.toggle('modal-active-sign')
+      }
+
+      function toggleModalForget() {
+        const body = document.querySelector('body')
+        const modal = document.querySelector('.modal-forget')
+        modal.classList.toggle('opacity-0')
+        modal.classList.toggle('pointer-events-none')
+        body.classList.toggle('modal-active-forget')
       }
 
     </script>
