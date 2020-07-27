@@ -54,20 +54,15 @@
     }
 
 
-    .modal {
+    .modal,
+    .modal-sign,
+    .modal-forget {
       transition: opacity 0.25s ease;
     }
 
-    .modal-sign {
-      transition: opacity 0.25s ease;
-    }
-
-    body.modal-active {
-      overflow-x: hidden;
-      overflow-y: visible !important;
-    }
-
-    body.modal-active-sign {
+    body.modal-active,
+    body.modal-active-sign,
+    body.modal-active-forget {
       overflow-x: hidden;
       overflow-y: visible !important;
     }
@@ -518,7 +513,8 @@
               <input
                 class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 name="password" id="password" type="password" placeholder="Password">
-              <a class="inline-block float-right align-baseline text-sm text-blue-500 hover:text-blue-800" href="#">
+              <a class="modal-open-forget inline-block float-right align-baseline text-sm text-blue-500 hover:text-blue-800"
+                href="#">
                 Forgot Password?
               </a>
               <!-- <p class="text-red-500 text-xs italic">Please choose a password.</p> -->
@@ -654,7 +650,7 @@
               <button
                 class="loginButton d-block w-full bg-blue-500  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit">
-                Signup
+                Forget password
               </button>
             </div>
             <div class="text-xs mt-4">Already have an account? <a class="loginBtn modal-open">Login</a>
@@ -670,134 +666,134 @@
       integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
 
 
-      <script>
-        function openLoginModal() {
+    <script>
+      function openLoginModal() {
+        toggleModalSignUp()
+        toggleModal()
+      }
+      function hightlightActiveRoute() {
+        const pageRoutes = document.getElementsByClassName("pageRoutes");
+        let routesArray = { "/": 0, "/news/": 1, "/projects/": 2, "/publications/": 3, "/tools/": 4, "/resources/": 5, "/imprint/": 6 };
+        if (pageRoutes.length > 0) {
+          let activeRoute = pageRoutes[routesArray[window.location.pathname]];
+          activeRoute.className += " active-nav-link";
+        }
+      }
+
+      //for modal
+      var openmodal = document.querySelectorAll('.modal-open')
+      for (var i = 0; i < openmodal.length; i++) {
+        openmodal[i].addEventListener('click', function (event) {
+          event.preventDefault()
+          toggleModal()
+        })
+      }
+
+      var openmodalSign = document.querySelectorAll('.modal-open-sign')
+      for (var i = 0; i < openmodalSign.length; i++) {
+        openmodalSign[i].addEventListener('click', function (event) {
+          event.preventDefault()
           toggleModalSignUp()
+        })
+      }
+
+      var openmodalForget = document.querySelectorAll('.modal-open-forget')
+      for (var i = 0; i < openmodalForget.length; i++) {
+        openmodalForget[i].addEventListener('click', function (event) {
+          event.preventDefault()
+          toggleModalForget()
+        })
+      }
+
+      const overlay = document.querySelector('.modal-overlay')
+      overlay.addEventListener('click', toggleModal)
+
+      const overlay_sign = document.querySelector('.modal-overlay-sign')
+      overlay_sign.addEventListener('click', toggleModalSignUp)
+
+      const overlay_forget = document.querySelector('.modal-overlay-forget')
+      overlay_sign.addEventListener('click', toggleModalForget)
+
+      var closemodal = document.querySelectorAll('.modal-close')
+      for (var i = 0; i < closemodal.length; i++) {
+        closemodal[i].addEventListener('click', toggleModal)
+      }
+
+      var closemodal_sign = document.querySelectorAll('.modal-close-sign')
+      for (var i = 0; i < closemodal_sign.length; i++) {
+        closemodal_sign[i].addEventListener('click', toggleModalSignUp)
+      }
+
+      var closemodal_forget = document.querySelectorAll('.modal-close-forget')
+      for (var i = 0; i < closemodal_forget.length; i++) {
+        closemodal_forget[i].addEventListener('click', toggleModalForget)
+      }
+
+      document.onkeydown = function (evt) {
+        evt = evt || window.event
+        var isEscape = false
+        if ("key" in evt) {
+          isEscape = (evt.key === "Escape" || evt.key === "Esc")
+        } else {
+          isEscape = (evt.keyCode === 27)
+        }
+        if (isEscape && document.body.classList.contains('modal-active')) {
           toggleModal()
         }
-        function hightlightActiveRoute() {
-          const pageRoutes = document.getElementsByClassName("pageRoutes");
-          let routesArray = { "/": 0, "/news/": 1, "/projects/": 2, "/publications/": 3, "/tools/": 4, "/resources/": 5, "/imprint/": 6 };
-          if (pageRoutes.length > 0) {
-            let activeRoute = pageRoutes[routesArray[window.location.pathname]];
-            activeRoute.className += " active-nav-link";
-          }
+      };
+
+      document.onkeydown = function (evt) {
+        evt = evt || window.event
+        var isEscape = false
+        if ("key" in evt) {
+          isEscape = (evt.key === "Escape" || evt.key === "Esc")
+        } else {
+          isEscape = (evt.keyCode === 27)
         }
-  
-        //for modal
-        var openmodal = document.querySelectorAll('.modal-open')
-        for (var i = 0; i < openmodal.length; i++) {
-          openmodal[i].addEventListener('click', function (event) {
-            event.preventDefault()
-            toggleModal()
-          })
+        if (isEscape && document.body.classList.contains('modal-active-sign')) {
+          toggleModalSignUp()
         }
-  
-        var openmodalSign = document.querySelectorAll('.modal-open-sign')
-        for (var i = 0; i < openmodalSign.length; i++) {
-          openmodalSign[i].addEventListener('click', function (event) {
-            event.preventDefault()
-            toggleModalSignUp()
-          })
+      };
+
+      document.onkeydown = function (evt) {
+        evt = evt || window.event
+        var isEscape = false
+        if ("key" in evt) {
+          isEscape = (evt.key === "Escape" || evt.key === "Esc")
+        } else {
+          isEscape = (evt.keyCode === 27)
         }
-  
-        var openmodalForget = document.querySelectorAll('.modal-open-forget')
-        for (var i = 0; i < openmodalForget.length; i++) {
-          openmodalForget[i].addEventListener('click', function (event) {
-            event.preventDefault()
-            toggleModalForget()
-          })
+        if (isEscape && document.body.classList.contains('modal-active-forget')) {
+          toggleModalForget()
         }
-  
-        const overlay = document.querySelector('.modal-overlay')
-        overlay.addEventListener('click', toggleModal)
-  
-        const overlay_sign = document.querySelector('.modal-overlay-sign')
-        overlay_sign.addEventListener('click', toggleModalSignUp)
-  
-        const overlay_forget = document.querySelector('.modal-overlay-forget')
-        overlay_sign.addEventListener('click', toggleModalForget)
-  
-        var closemodal = document.querySelectorAll('.modal-close')
-        for (var i = 0; i < closemodal.length; i++) {
-          closemodal[i].addEventListener('click', toggleModal)
-        }
-  
-        var closemodal_sign = document.querySelectorAll('.modal-close-sign')
-        for (var i = 0; i < closemodal_sign.length; i++) {
-          closemodal_sign[i].addEventListener('click', toggleModalSignUp)
-        }
-  
-        var closemodal_forget = document.querySelectorAll('.modal-close-forget')
-        for (var i = 0; i < closemodal_forget.length; i++) {
-          closemodal_forget[i].addEventListener('click', toggleModalForget)
-        }
-  
-        document.onkeydown = function (evt) {
-          evt = evt || window.event
-          var isEscape = false
-          if ("key" in evt) {
-            isEscape = (evt.key === "Escape" || evt.key === "Esc")
-          } else {
-            isEscape = (evt.keyCode === 27)
-          }
-          if (isEscape && document.body.classList.contains('modal-active')) {
-            toggleModal()
-          }
-        };
-  
-        document.onkeydown = function (evt) {
-          evt = evt || window.event
-          var isEscape = false
-          if ("key" in evt) {
-            isEscape = (evt.key === "Escape" || evt.key === "Esc")
-          } else {
-            isEscape = (evt.keyCode === 27)
-          }
-          if (isEscape && document.body.classList.contains('modal-active-sign')) {
-            toggleModalSignUp()
-          }
-        };
-  
-        document.onkeydown = function (evt) {
-          evt = evt || window.event
-          var isEscape = false
-          if ("key" in evt) {
-            isEscape = (evt.key === "Escape" || evt.key === "Esc")
-          } else {
-            isEscape = (evt.keyCode === 27)
-          }
-          if (isEscape && document.body.classList.contains('modal-active-forget')) {
-            toggleModalForget()
-          }
-        };
-  
-  
-        function toggleModal() {
-          const body = document.querySelector('body')
-          const modal = document.querySelector('.modal')
-          modal.classList.toggle('opacity-0')
-          modal.classList.toggle('pointer-events-none')
-          body.classList.toggle('modal-active')
-        }
-  
-        function toggleModalSignUp() {
-          const body = document.querySelector('body')
-          const modal = document.querySelector('.modal-sign')
-          modal.classList.toggle('opacity-0')
-          modal.classList.toggle('pointer-events-none')
-          body.classList.toggle('modal-active-sign')
-        }
-  
-        function toggleModalForget() {
-          const body = document.querySelector('body')
-          const modal = document.querySelector('.modal-forget')
-          modal.classList.toggle('opacity-0')
-          modal.classList.toggle('pointer-events-none')
-          body.classList.toggle('modal-active-forget')
-        }
-  
-      </script>
+      };
+
+
+      function toggleModal() {
+        const body = document.querySelector('body')
+        const modal = document.querySelector('.modal')
+        modal.classList.toggle('opacity-0')
+        modal.classList.toggle('pointer-events-none')
+        body.classList.toggle('modal-active')
+      }
+
+      function toggleModalSignUp() {
+        const body = document.querySelector('body')
+        const modal = document.querySelector('.modal-sign')
+        modal.classList.toggle('opacity-0')
+        modal.classList.toggle('pointer-events-none')
+        body.classList.toggle('modal-active-sign')
+      }
+
+      function toggleModalForget() {
+        const body = document.querySelector('body')
+        const modal = document.querySelector('.modal-forget')
+        modal.classList.toggle('opacity-0')
+        modal.classList.toggle('pointer-events-none')
+        body.classList.toggle('modal-active-forget')
+      }
+
+    </script>
 </body>
 
 </html>
