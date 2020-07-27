@@ -445,13 +445,7 @@
             <div class="text-xs mt-4">New to IEC61499?<a class="modal-open-sign
            loginBtn">&nbsp;&nbsp;Signup</a></div>
           </form>
-          <!-- </div> -->
 
-          <!--Footer-->
-          <!-- <div class="flex justify-end pt-2">
-      <button class="px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2">Action</button>
-      <button class="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Close</button>
-    </div> -->
 
         </div>
       </div>
@@ -524,14 +518,61 @@
             <div class="text-xs mt-4">Already have an account? <a class="modal-open loginBtn"
                 onclick="openLoginModal()">Login</a></div>
           </form>
-          <!-- </div> -->
 
-          <!--Footer-->
-          <!-- <div class="flex justify-end pt-2">
-			  <button class="px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2">Action</button>
-			  <button class="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Close</button>
-			</div> -->
+        </div>
+      </div>
+    </div>
 
+    <!---forget up modal-->
+    <div
+      class="modal-forget opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+      <div class="modal-overlay-forget absolute w-full h-full bg-gray-900 opacity-50"></div>
+
+      <div
+        class="modal-container bg-white w-11/12 md:max-w-md h-64 mx-auto rounded shadow-lg z-50 overflow-y-auto border-t-2">
+
+        <div
+          class="modal-close-forget absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+          <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+            viewBox="0 0 18 18">
+            <path
+              d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+            </path>
+          </svg>
+          <span class="text-sm">(Esc)</span>
+        </div>
+
+        <div class="modal-content py-4 text-left px-6">
+          <div class="flex justify-between items-center pb-3">
+            <p class="text-2xl text-gray-700">Forgot Password</p>
+            <div class="modal-close-forget cursor-pointer z-50">
+              <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                viewBox="0 0 18 18">
+                <path
+                  d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+                </path>
+              </svg>
+            </div>
+          </div>
+
+          <form class="bg-white" method="post" action="{{BASE_URL}}/send_email/">
+
+            <div class="mb-4">
+              {%csrf_token%}
+              <input
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                name="email" id="email" type="email" placeholder="Email">
+            </div>
+            <div class="flex items-center justify-between d-block">
+              <button
+                class="loginButton d-block w-full bg-blue-500  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="submit">
+                Signup
+              </button>
+            </div>
+            <div class="text-xs mt-4">Already have an account? <a class="loginBtn modal-open">Login</a>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -543,96 +584,134 @@
       integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
 
 
-    <script>
-      function openLoginModal() {
-        toggleModalSignUp()
-        toggleModal()
-      }
-      function hightlightActiveRoute() {
-        const pageRoutes = document.getElementsByClassName("pageRoutes");
-        let routesArray = { "/": 0, "/news/": 1, "/projects/": 2, "/publications/": 3, "/tools/": 4, "/resources/": 5, "/imprint/": 6 };
-        if (pageRoutes.length > 0) {
-          let activeRoute = pageRoutes[routesArray[window.location.pathname]];
-          activeRoute.className += " active-nav-link";
-        }
-      }
-
-      var openmodal = document.querySelectorAll('.modal-open')
-      for (var i = 0; i < openmodal.length; i++) {
-        openmodal[i].addEventListener('click', function (event) {
-          event.preventDefault()
-          toggleModal()
-        })
-      }
-
-      var openmodalSign = document.querySelectorAll('.modal-open-sign')
-      for (var i = 0; i < openmodalSign.length; i++) {
-        openmodalSign[i].addEventListener('click', function (event) {
-          event.preventDefault()
+      <script>
+        function openLoginModal() {
           toggleModalSignUp()
-        })
-      }
-
-      const overlay = document.querySelector('.modal-overlay')
-      overlay.addEventListener('click', toggleModal)
-
-      const overlay_sign = document.querySelector('.modal-overlay-sign')
-      overlay_sign.addEventListener('click', toggleModalSignUp)
-
-      var closemodal = document.querySelectorAll('.modal-close')
-      for (var i = 0; i < closemodal.length; i++) {
-        closemodal[i].addEventListener('click', toggleModal)
-      }
-
-      var closemodal_sign = document.querySelectorAll('.modal-close-sign')
-      for (var i = 0; i < closemodal_sign.length; i++) {
-        closemodal_sign[i].addEventListener('click', toggleModalSignUp)
-      }
-
-      document.onkeydown = function (evt) {
-        evt = evt || window.event
-        var isEscape = false
-        if ("key" in evt) {
-          isEscape = (evt.key === "Escape" || evt.key === "Esc")
-        } else {
-          isEscape = (evt.keyCode === 27)
-        }
-        if (isEscape && document.body.classList.contains('modal-active')) {
           toggleModal()
         }
-      };
-
-      document.onkeydown = function (evt) {
-        evt = evt || window.event
-        var isEscape = false
-        if ("key" in evt) {
-          isEscape = (evt.key === "Escape" || evt.key === "Esc")
-        } else {
-          isEscape = (evt.keyCode === 27)
+        function hightlightActiveRoute() {
+          const pageRoutes = document.getElementsByClassName("pageRoutes");
+          let routesArray = { "/": 0, "/news/": 1, "/projects/": 2, "/publications/": 3, "/tools/": 4, "/resources/": 5, "/imprint/": 6 };
+          if (pageRoutes.length > 0) {
+            let activeRoute = pageRoutes[routesArray[window.location.pathname]];
+            activeRoute.className += " active-nav-link";
+          }
         }
-        if (isEscape && document.body.classList.contains('modal-active-sign')) {
-          toggleModalSignUp()
+  
+        //for modal
+        var openmodal = document.querySelectorAll('.modal-open')
+        for (var i = 0; i < openmodal.length; i++) {
+          openmodal[i].addEventListener('click', function (event) {
+            event.preventDefault()
+            toggleModal()
+          })
         }
-      };
-
-
-      function toggleModal() {
-        const body = document.querySelector('body')
-        const modal = document.querySelector('.modal')
-        modal.classList.toggle('opacity-0')
-        modal.classList.toggle('pointer-events-none')
-        body.classList.toggle('modal-active')
-      }
-
-      function toggleModalSignUp() {
-        const body = document.querySelector('body')
-        const modal = document.querySelector('.modal-sign')
-        modal.classList.toggle('opacity-0')
-        modal.classList.toggle('pointer-events-none')
-        body.classList.toggle('modal-active-sign')
-      }
-
-    </script>
+  
+        var openmodalSign = document.querySelectorAll('.modal-open-sign')
+        for (var i = 0; i < openmodalSign.length; i++) {
+          openmodalSign[i].addEventListener('click', function (event) {
+            event.preventDefault()
+            toggleModalSignUp()
+          })
+        }
+  
+        var openmodalForget = document.querySelectorAll('.modal-open-forget')
+        for (var i = 0; i < openmodalForget.length; i++) {
+          openmodalForget[i].addEventListener('click', function (event) {
+            event.preventDefault()
+            toggleModalForget()
+          })
+        }
+  
+        const overlay = document.querySelector('.modal-overlay')
+        overlay.addEventListener('click', toggleModal)
+  
+        const overlay_sign = document.querySelector('.modal-overlay-sign')
+        overlay_sign.addEventListener('click', toggleModalSignUp)
+  
+        const overlay_forget = document.querySelector('.modal-overlay-forget')
+        overlay_sign.addEventListener('click', toggleModalForget)
+  
+        var closemodal = document.querySelectorAll('.modal-close')
+        for (var i = 0; i < closemodal.length; i++) {
+          closemodal[i].addEventListener('click', toggleModal)
+        }
+  
+        var closemodal_sign = document.querySelectorAll('.modal-close-sign')
+        for (var i = 0; i < closemodal_sign.length; i++) {
+          closemodal_sign[i].addEventListener('click', toggleModalSignUp)
+        }
+  
+        var closemodal_forget = document.querySelectorAll('.modal-close-forget')
+        for (var i = 0; i < closemodal_forget.length; i++) {
+          closemodal_forget[i].addEventListener('click', toggleModalForget)
+        }
+  
+        document.onkeydown = function (evt) {
+          evt = evt || window.event
+          var isEscape = false
+          if ("key" in evt) {
+            isEscape = (evt.key === "Escape" || evt.key === "Esc")
+          } else {
+            isEscape = (evt.keyCode === 27)
+          }
+          if (isEscape && document.body.classList.contains('modal-active')) {
+            toggleModal()
+          }
+        };
+  
+        document.onkeydown = function (evt) {
+          evt = evt || window.event
+          var isEscape = false
+          if ("key" in evt) {
+            isEscape = (evt.key === "Escape" || evt.key === "Esc")
+          } else {
+            isEscape = (evt.keyCode === 27)
+          }
+          if (isEscape && document.body.classList.contains('modal-active-sign')) {
+            toggleModalSignUp()
+          }
+        };
+  
+        document.onkeydown = function (evt) {
+          evt = evt || window.event
+          var isEscape = false
+          if ("key" in evt) {
+            isEscape = (evt.key === "Escape" || evt.key === "Esc")
+          } else {
+            isEscape = (evt.keyCode === 27)
+          }
+          if (isEscape && document.body.classList.contains('modal-active-forget')) {
+            toggleModalForget()
+          }
+        };
+  
+  
+        function toggleModal() {
+          const body = document.querySelector('body')
+          const modal = document.querySelector('.modal')
+          modal.classList.toggle('opacity-0')
+          modal.classList.toggle('pointer-events-none')
+          body.classList.toggle('modal-active')
+        }
+  
+        function toggleModalSignUp() {
+          const body = document.querySelector('body')
+          const modal = document.querySelector('.modal-sign')
+          modal.classList.toggle('opacity-0')
+          modal.classList.toggle('pointer-events-none')
+          body.classList.toggle('modal-active-sign')
+        }
+  
+        function toggleModalForget() {
+          const body = document.querySelector('body')
+          const modal = document.querySelector('.modal-forget')
+          modal.classList.toggle('opacity-0')
+          modal.classList.toggle('pointer-events-none')
+          body.classList.toggle('modal-active-forget')
+        }
+  
+      </script>
 </body>
 
 </html>

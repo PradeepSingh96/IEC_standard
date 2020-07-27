@@ -419,7 +419,7 @@
               <input
                 class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 name="password" id="password" type="password" placeholder="Password">
-              <a class="modal-forget inline-block float-right align-baseline text-sm text-blue-500 hover:text-blue-800"
+              <a class="modal-open-forget inline-block float-right align-baseline text-sm text-blue-500 hover:text-blue-800"
                 href="#">
                 Forgot Password?
               </a>
@@ -533,7 +533,7 @@
       <div class="modal-overlay-forget absolute w-full h-full bg-gray-900 opacity-50"></div>
 
       <div
-        class="modal-container bg-white w-11/12 md:max-w-xs mx-auto rounded shadow-lg z-50 overflow-y-auto border-t-2">
+        class="modal-container bg-white w-11/12 md:max-w-md h-64 mx-auto rounded shadow-lg z-50 overflow-y-auto border-t-2">
 
         <div
           class="modal-close-forget absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
@@ -559,27 +559,13 @@
             </div>
           </div>
 
-          <form class="bg-white" method="post" action="{{BASE_URL}}/register/">
+          <form class="bg-white" method="post" action="{{BASE_URL}}/send_email/">
+
             <div class="mb-4">
               {%csrf_token%}
               <input
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                name="name" id="username" type="text" placeholder="Full Name">
-            </div>
-            <div class="mb-4">
-              <input
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 name="email" id="email" type="email" placeholder="Email">
-            </div>
-            <div class="mb-6">
-              <input
-                class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                name="password1" id="password" type="password" placeholder="Password">
-            </div>
-            <div class="mb-6">
-              <input
-                class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                name="password2" id="password" type="password" placeholder="Confirm Password">
             </div>
             <div class="flex items-center justify-between d-block">
               <button
@@ -615,24 +601,6 @@
           activeRoute.className += " active-nav-link";
         }
       }
-
-
-      // var location = window.location.url;
-      // console.log("location", location)
-      // var nav = document.querySelectorAll('.nav-item')
-      // for (var i = 0; i < nav.length; i++) {
-      //   nav.addEventListener('click', function (event) {
-      //     event.preventDefault()
-      //     console.log("clicked");
-      //     const modal = document.querySelector('.nav-item');
-      //     console.log("modal", modal)
-      //     modal.classList.remove('active-nav-link')
-      //     this.classList.add('active-nav-link')
-      //     // 
-      //   })
-      // }
-
-
 
       //for modal
       var openmodal = document.querySelectorAll('.modal-open')
@@ -679,8 +647,8 @@
       }
 
       var closemodal_forget = document.querySelectorAll('.modal-close-forget')
-      for (var i = 0; i < closemodal_sign.length; i++) {
-        closemodal_sign[i].addEventListener('click', toggleModalForget)
+      for (var i = 0; i < closemodal_forget.length; i++) {
+        closemodal_forget[i].addEventListener('click', toggleModalForget)
       }
 
       document.onkeydown = function (evt) {
@@ -717,7 +685,7 @@
         } else {
           isEscape = (evt.keyCode === 27)
         }
-        if (isEscape && document.body.classList.contains('modal-active-sign')) {
+        if (isEscape && document.body.classList.contains('modal-active-forget')) {
           toggleModalForget()
         }
       };
