@@ -18,24 +18,7 @@ EMAIL_HOST_USER = settings.EMAIL_HOST_USER
 
 
 def index(request):
-    if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
-        user_email = User.objects.filter(email=email)
-        if len(user_email) == 0:
-            messages.info(request, 'email is not registered')
-            return redirect('login')
-        user = auth.authenticate(email=email, password=password)
-        if user is not None:
-            auth.login(request, user)
-            # update_last_login(None, user)
-            return redirect('/')
-        else:
-            messages.info(request, 'invalid credentials')
-            return redirect('login')
-
-    else:
-        return render(request, 'index.html')
+    return render(request, 'index.html')
 
 
 # User Register
@@ -66,7 +49,6 @@ def register(request):
 # user login
 def login(request):
     if request.method == 'POST':
-
         email = request.POST['email']
         password = request.POST['password']
         user_email = User.objects.filter(email=email)
@@ -76,7 +58,7 @@ def login(request):
         user = auth.authenticate(email=email, password=password)
         if user is not None:
             auth.login(request, user)
-            update_last_login(None, user)
+            # update_last_login(None, user)
             return redirect('/')
         else:
             messages.info(request, 'invalid credentials')
