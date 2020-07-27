@@ -144,9 +144,12 @@
       {% if user.is_authenticated %}
       <form method="post" action="{{BASE_URL}}/logout/">
         {% csrf_token %}
-        <div class="w-1/2 flex justify-end">
-          Hello {{user.name}}
-          <button class="mr-6" type="submit">Logout</button>
+        <div style="right: 0;
+        position: absolute;
+        top: 24px;
+        bottom: 0;" class="mr-6">
+          <span class="mr-4">Hello {{user.name}}</span>
+          <button type="submit">Logout</button>
         </div>
       </form>
       {% else %}
