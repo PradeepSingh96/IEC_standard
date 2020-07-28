@@ -23,27 +23,7 @@ def index(request):
 
 # User Register
 def register(request):
-    if request.method == 'POST':
-        name = request.POST['name']
-        email = request.POST['email']
-        password1 = request.POST['password1']
-        password2 = request.POST['password2']
-        if password1 == password2:
-            if User.objects.filter(email=email).exists():
-                print('email already registered')
-                messages.info(request, 'email already registered')
-                return redirect('register')
-            else:
-                user = User.objects.create_user(name=name, password=password1, email=email)
-                print("user created")
-                return redirect('/')
-        else:
-            print('password not matching....')
-            messages.info(request, 'password not matched')
-            return redirect('/')
-
-    else:
-        return render(request, 'register.html')
+    return render(request, 'register.html')
 
 
 # user login
