@@ -224,9 +224,9 @@
                 <div class="flex flex-wrap">
                     <div class="w-full relative">
                         <img style="height:24rem;" class="w-full object-cover" src="./../media/bg-signup.png">
-                        <div class="text-black absolute bottom-0 left-0 w-3/5 ml-12 p-4">
+                        <div class="text-black absolute bottom-0 left-0 lg:w-3/5 sm:w-auto lg:ml-12 p-4">
                             <div
-                                class="w-1/4 mt-16 bg-red-600 text-white py-2 px-4 focus:outline-none focus:shadow-outline">
+                                class="lg:w-1/4 sm:w-auto mt-16 bg-red-600 text-white py-2 px-4 focus:outline-none focus:shadow-outline">
                                 sagittis vitae
                             </div>
                             <p class="text-4xl font-black">Lorem ipsum dolor sit amet, consectetur</p>
@@ -257,11 +257,13 @@
             {%for i in news%}
             <div class="mx-6 mt-6">
                 <div class="flex flex-wrap">
-                    <div class="w-3/4 h-40">
-                        <img src="{{i.image.url}}" alt="">
+                    <div class="lg:w-3/4 sm:w-auto">
+                        <img class="w-full object-fill" src="{{i.image.url}}" alt="">
                     </div>
-                    <div class="w-56 ml-4">
-                        <div class="bg-white">
+                    <div class="lg:w-56 w-full lg:ml-4">
+
+
+                        <div class="bg-white lg:h-32">
                             <div class="flex flex-wrap">
                                 <div class="w-full p-3">
                                     <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2">{{i.title}}</p>
@@ -275,26 +277,26 @@
                             </div>
                         </div>
 
-                        <div class="bg-white mt-6">
+                        <div class="bg-white mt-4 lg:h-32">
                             <div class="flex flex-wrap">
                                 <div class="w-full p-3">
-                                    <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2">2020</p>
+                                    <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2"><a
+                                            href="{{i.link}}">{{i.link}}</a></p>
                                     <p class="text-sm flex items-center text-blue-500 font-semibold mt-3">
-                                        OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
-                                        architecture
+                                        {{i.description}}
                                     </p>
                                 </div>
                             </div>
                         </div>
 
 
-                        <div class="bg-white mt-6">
+                        <div class="bg-white mt-4 lg:h-32">
                             <div class="flex flex-wrap">
                                 <div class="w-full p-3">
-                                    <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2">2020</p>
+                                    <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2"><a
+                                            href="{{i.link}}">{{i.link}}</a></p>
                                     <p class="text-sm flex items-center text-blue-500 font-semibold mt-3">
-                                        OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
-                                        architecture
+                                        {{i.description}}
                                     </p>
                                 </div>
                             </div>
@@ -307,16 +309,16 @@
 
 
             {%for i in news%}
-            <div class="mx-6 mt-6 h-64">
+            <div class="mx-6 mt-6">
                 <div class="flex flex-wrap">
-                    <div class="w-2/5">
-                        <img class="h-full w-full object-cover" src="{{i.image.url}}" alt="">
+                    <div class="lg:w-2/5 sm:w-auto">
+                        <img class="lg:h-64 w-full object-fill" src="{{i.image.url}}" alt="">
                     </div>
-                    <div class="w-4/12 ml-4">
-                        <img class="h-32 w-full object-cover mb-3" src="{{i.image.url}}" alt="">
-                        <img class="h-32 w-full object-cover" src="{{i.image.url}}" alt="">
+                    <div class="lg:w-4/12 lg:ml-4 sm:w-auto">
+                        <img class="lg:h-32 w-full object-fill mb-2" src="{{i.image.url}}" alt="">
+                        <img class="lg:h-32 w-full object-fill" src="{{i.image.url}}" alt="">
                     </div>
-                    <div class="w-56 ml-4">
+                    <div class="lg:w-56 w-full lg:ml-4">
                         <div class="bg-white">
                             <div class="flex flex-wrap">
                                 <div class="w-full p-3">
@@ -334,23 +336,12 @@
                         <div class="bg-white mt-6">
                             <div class="flex flex-wrap">
                                 <div class="w-full p-3">
-                                    <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2">2020</p>
+                                    <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2">{{i.title}}</p>
                                     <p class="text-sm flex items-center text-blue-500 font-semibold mt-3">
-                                        OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
-                                        architecture
+                                        <a href="{{i.link}}" style="color:blue">{{i.link}}</a>
                                     </p>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="bg-white mt-6">
-                            <div class="flex flex-wrap">
-                                <div class="w-full p-3">
-                                    <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2">2020</p>
                                     <p class="text-sm flex items-center text-blue-500 font-semibold mt-3">
-                                        OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS
-                                        architecture
+                                        {{i.description}}
                                     </p>
                                 </div>
                             </div>
@@ -363,7 +354,7 @@
 
 
 
-            <div class="flex flex-wrap bg-gray-200 p-6">
+            <!-- <div class="flex flex-wrap bg-gray-200 p-6">
                 <div class="card-width h-64 pr-3 object-fill">
                     <img src="./../media/bg-signup.png">
                 </div>
@@ -405,7 +396,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="p-4 bg-white m-6 border border-gray-200 shadow-md">
                 <div class="flex flex-wrap">
                     <div class="w-full">
@@ -417,10 +408,10 @@
                 </div>
             </div>
 
-            <main class="w-full flex-grow p-6">
+            <!-- <main class="w-full flex-grow p-6">
                 <div class="flex flex-wrap">
                     <div class="w-full image-width">
-                        <!--Add image here-->
+            
                         <img src="./../media/bg-signup.png">
                     </div>
                     <div class="w-full lg:w-3/6 ml-3">
@@ -437,30 +428,17 @@
                         </div>
                     </div>
                 </div>
-            </main>
-
-
-
-            <div class="p-4 bg-white m-6 border border-gray-200 shadow-md">
-                <div class="flex flex-wrap">
-                    <div class="w-full">
-                        <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2">2020</p>
-                        <p class="text-sm flex items-center text-blue-500 font-semibold mt-3">
-                            OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS architecture
-                        </p>
-                    </div>
-                </div>
-            </div>
+            </main> -->
 
 
             <main class="w-full flex-grow p-6">
                 <div class="flex flex-wrap">
                     <!-- <div class="w-full"> -->
                     <!--Add image here-->
-                    <img class="object-cover h-64 w-2/5" src="./../media/bg-signup.png">
+                    <img class="object-cover h-64 lg:w-2/5 sm:w-auto" src="./../media/bg-signup.png">
                     <!-- </div> -->
-                    <div class="w-full lg:w-7/12 ml-3">
-                        <div class="p-6 bg-white border border-gray-200 shadow-md">
+                    <div class="w-full lg:w-7/12 sm:w-auto lg:ml-3">
+                        <div class="lg:h-64 p-6 bg-white border border-gray-200 shadow-md">
                             <div class="flex flex-wrap">
                                 <div class="w-full">
                                     <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2">2020</p>
@@ -487,13 +465,29 @@
             </main>
 
 
+
+            <div class="p-4 bg-white m-6 border border-gray-200 shadow-md">
+                <div class="flex flex-wrap">
+                    <div class="w-full">
+                        <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2">2020</p>
+                        <p class="text-sm flex items-center text-blue-500 font-semibold mt-3">
+                            OPAF lead by ExxonMobil uses IEC 61499 as one of the pillars in O_PAS architecture
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
             <main class="w-full flex-grow p-6">
                 <div class="flex flex-wrap">
                     <!-- <div class="w-full"> -->
                     <!--Add image here-->
-                    <img class="object-cover h-64 w-2/5" src="./../media/bg-signup.png">
+                    <img class="object-cover h-64 lg:w-2/5 sm:w-auto" src="./../media/bg-signup.png">
                     <!-- </div> -->
-                    <div class="w-full lg:w-7/12 ml-3">
+                    <div class="w-full lg:w-7/12 sm:w-auto lg:ml-3">
                         <div class="p-6 bg-white border border-gray-200 shadow-md">
                             <div class="flex flex-wrap">
                                 <div class="w-full">

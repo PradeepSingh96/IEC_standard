@@ -100,6 +100,12 @@
     .card-width {
       width: 48%
     }
+
+    @media(max-width:767px) {
+      .card-width {
+        width: 100%
+      }
+    }
   </style>
 </head>
 
@@ -260,11 +266,11 @@
         <div class="flex flex-wrap">
           <div class="card-width">
             <div class="lg:max-w-full lg:flex">
-              <div class="w-1/2">
-                <img class=" object-fill h-48" src="./../media/bg-signup.png">
+              <div class="lg:w-1/2 sm:w-auto">
+                <img class="w-full object-fill h-48" src="./../media/bg-signup.png">
               </div>
 
-              <div class="bg-white mb-8 h-48 w-1/2">
+              <div class="bg-white mb-8 h-48 lg:w-1/2 sm:w-auto">
                 <div class="flex flex-wrap">
                   <div class="w-full p-3">
                     <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2 underline">2019-2022</p>
@@ -280,13 +286,13 @@
             </div>
           </div>
 
-          <div class="card-width ml-3">
+          <div class="card-width lg:ml-3">
             <div class="lg:max-w-full lg:flex">
-              <div class="w-1/2">
-                <img class=" object-fill h-48" src="./../media/bg-signup.png">
+              <div class="lg:w-1/2 sm:w-auto">
+                <img class="w-full object-fill h-48" src="./../media/bg-signup.png">
               </div>
 
-              <div class="bg-white mb-8 h-48 w-1/2">
+              <div class="bg-white mb-8 h-48 lg:w-1/2 sm:w-auto">
                 <div class="flex flex-wrap">
                   <div class="w-full p-3">
                     <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2 underline">2019-2022</p>
@@ -309,11 +315,11 @@
         <div class="flex flex-wrap">
           <div class="card-width">
             <div class="lg:max-w-full lg:flex">
-              <div class="w-1/2">
-                <img class=" object-fill h-48" src="./../media/bg-signup.png">
+              <div class="lg:w-1/2 sm:w-auto">
+                <img class="w-full object-fill h-48" src="./../media/bg-signup.png">
               </div>
 
-              <div class="bg-white mb-8 h-48 w-1/2">
+              <div class="bg-white mb-8 h-48 lg:w-1/2 sm:w-auto">
                 <div class="flex flex-wrap">
                   <div class="w-full p-3">
                     <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2 underline">2016-2019</p>
@@ -329,13 +335,13 @@
             </div>
           </div>
 
-          <div class="card-width ml-3">
+          <div class="card-width lg:ml-3">
             <div class="lg:max-w-full lg:flex">
-              <div class="w-1/2">
-                <img class=" object-fill h-48" src="./../media/bg-signup.png">
+              <div class="lg:w-1/2 sm:w-auto">
+                <img class="w-full object-fill h-48" src="./../media/bg-signup.png">
               </div>
 
-              <div class="bg-white mb-8 h-48 w-1/2">
+              <div class="bg-white mb-8 h-48 lg:w-1/2 sm:w-auto">
                 <div class="flex flex-wrap">
                   <div class="w-full p-3">
                     <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2 underline">2016-2019</p>
@@ -357,11 +363,11 @@
         <div class="flex flex-wrap">
           <div class="card-width">
             <div class="lg:max-w-full lg:flex">
-              <div class="w-1/2">
-                <img class=" object-fill h-48" src="./../media/bg-signup.png">
+              <div class="lg:w-1/2 sm:w-auto">
+                <img class="w-full object-fill h-48" src="./../media/bg-signup.png">
               </div>
 
-              <div class="bg-white mb-8 h-48 w-1/2">
+              <div class="bg-white mb-8 h-48 lg:w-1/2 sm:w-auto">
                 <div class="flex flex-wrap">
                   <div class="w-full p-3">
                     <p class="text-gray-700 text-sm border-l-2 border-yellow-400 pl-2 underline">2016-2019</p>
@@ -406,11 +412,11 @@
 
         {% for i in Student_projects%}
         <div class="flex flex-wrap mt-3">
-          <div class="w-1/4 ">
+          <div class="lg:w-1/4 sm:w-auto">
 
             <img class="w-full object-fill h-48" src="{{i.image.url}}">
           </div>
-          <div class="lg:w-3/4">
+          <div class="lg:w-3/4 sm:w-auto">
             <div class="p-4 bg-white border border-gray-300 h-48">
               <div class="flex flex-wrap">
                 <div class="w-full">
@@ -448,8 +454,8 @@
 
         <div class="w-full mt-3">
           <div class="lg:max-w-full lg:flex">
-            <div class="w-2/12"></div>
-            <div class="w-1/2">
+            <div class="lg:w-2/12 sm:w-auto"></div>
+            <div class="lg:w-1/2 sm:auto">
               <div class="m-6 text-md text-gray-700 border border-gray-400 mb-3 flex-1 text-center">
                 FESTO- Modular Production
                 System
@@ -458,8 +464,8 @@
                   src="./../media/festo-demonstrator+wago_en_klein.png"
                   alt=" FESTO - Modular Production System at the MLU"></a>
             </div>
-            <div class="w-2/12"></div>
-            <div class="w-1/2">
+            <div class="lg:w-2/12 sm:w-auto"></div>
+            <div class="lg:w-1/2 sm:w-auto">
               <div class="m-6 text-md text-gray-700 border border-gray-400 mb-3 flex-1 text-center">FESTO- Modular
                 Production
                 System
@@ -474,11 +480,11 @@
 
         {% for i in Test_beds%}
         <div class="flex flex-wrap mt-3">
-          <div class="w-1/4 ">
+          <div class="lg:w-1/4 sm:w-auto">
 
             <img class="w-full object-fill h-48" src="{{i.image.url}}">
           </div>
-          <div class="lg:w-3/4">
+          <div class="lg:w-3/4 sm:w-auto">
             <div class="p-4 bg-white border border-gray-300 h-48">
               <div class="flex flex-wrap">
                 <div class="w-full">
